@@ -1,0 +1,47 @@
+Lugar y Fecha: Guatemala, dd/mm/yyy hh24:mi
+Usuario: nombre_usuario_sin_espacios
+Red social: ChapinChat
+Mensaje escrito por el usuario en la red social
+
+
+
+*****************palabras clave**********************************
+Perfil: Deportista
+Palabras clave: fútbol, balonmano, baloncesto, balompié, football, basketball, handball,
+estadio, selección, champions league, liga de campeones, tenis, natación, olimpiada,
+gym, gimnasio.
+Perfil: Cultura saludable
+Palabras clave: gimnasio, comida saludable, ejercicio, maratón, carrera, entreno,
+entrenar, entrenamiento, pesas, karate, tae kwon do, boxeo, gym, healthy food,
+vitaminas, caminata, caminar, ropa deportiva, bebida hidratante, bebidas hidratantes.
+
+********************palabras excluidas**********************************
+Palabras Excluidas
+Palabras: a, un, una, en, para, por, que, qué, la, las, los, el, unas, si, no, sino, entre,
+otro, otra, otros, otras, de, del, nos, sus, su, am, pm.
+
+Adicionalmente, todos los valores
+numéricos (1, 40, 33, 50.33, etc.) son excluidos por default.
+ (OJO: todos los signos de puntuación no se consideran
+palabras).
+
+
+Repo de ejemplo del proyecto 3
+
+https://github.com/Teitan67/IPC2_EJEMPLO_PY3
+
+
+ejecutar django
+python manage.py runserver
+python manage.py runserver 8080
+python manage.py runserver 0.0.0.0:8000
+
+pip install requests
+pip install requests
+
+
+https://drive.google.com/file/d/1U6OumjhhNZ3HqubY8JDKzOYGyI2Va5YB/view?usp=share_link
+https://drive.google.com/file/d/12rxjy-ehUKqZjpxNoFiFoukImgtrGoq9/view?usp=share_link
+https://drive.google.com/file/d/1yDVDFoh2DJ0kl5sBHHdKrXDrlm510PE-/view?usp=share_link
+https://drive.google.com/file/d/1tmW-eSZUKZ1oyYwPT6nUdjAVwGOaiGNn/view?usp=share_link
+https://drive.google.com/file/d/1lQ5UJBEK44Ze282cDK7xbcenG9IFOhem/view?usp=share_link

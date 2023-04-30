@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Formulario de Canciones</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/style.css' %}">
+</head>
+
+<body>
+    <h1>Formulario de Canciones</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="artista">Artista:</label>
+        <input type="text" id="artista" name="artista">
+        <br>
+        <label for="cancion">Canción:</label>
+        <input type="text" id="cancion" name="cancion">
+        <br>
+        <label for="letras">Letras:</label>
+        <textarea id="letras" name="letras"></textarea>
+        <br>
+        <input type="submit" value="Guardar">
+    </form>
+    {% if respuesta_servidor %}
+    <h2>Respuesta del servidor externo:</h2>
+    <p>{{ respuesta_servidor }}</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Categoria</th>
+                <th>Coincidencias</th>
+                <th>Porcentaje</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in categorias %}
+            <tr>
+                <td>{{ data.categoria }}</td>
+                <td>{{ data.coincidencias }}</td>
+                <td>{{ data.porcentaje }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</body>
+
+</html>
