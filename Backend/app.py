@@ -2,7 +2,7 @@ from flask import Flask,request, jsonify,Response
 import xml.etree.ElementTree as et
 import os
 from subprocess import check_output
-from solicitudUno import Descartada,Perfil
+from solicitudUno import Perfil
 
 palabrasDescartadas = []
 listPerfiles = []
@@ -38,14 +38,20 @@ def ObtenerDatos():
                                             palabraPerfil = pal.text
                                         palabrasClave.append(str(palabraPerfil).strip())
                             objPerfil = Perfil(name,palabrasClave)
-                            print(name," ", palabrasClave)
                             listPerfiles.append(objPerfil)    
-        
             elif dat.tag == "descartadas":
                 for des in dat:
                     if des.tag == 'palabra':
                         palabra_descartada = des.text
                     palabrasDescartadas.append(str(palabra_descartada).strip())
+        print('Palabras Descartadas')
+        for j in palabrasDescartadas:
+            print(j)
+        print('Perfiles')
+        for i in listPerfiles:
+            print(i.getNombre())
+            for k in i.listaPalabrasClave:
+                print(k)
         return jsonify({'message':'Archivo leído correctamente',})
     except:
         return jsonify({"message": "Ha ocurrido un error"})
