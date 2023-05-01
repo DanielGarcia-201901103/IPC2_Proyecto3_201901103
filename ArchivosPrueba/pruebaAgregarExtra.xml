@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<configuracion>
+    <perfiles>
+        <perfil>
+            <nombre> Musica</nombre>
+            <palabrasClave>
+                <palabra>guitarra</palabra> 
+                <palabra>flauta</palabra> 
+                <palabra>concierto</palabra> 
+                <palabra>teclado</palabra> 
+                <palabra>saxofon</palabra> 
+                <palabra>trompeta</palabra> 
+                <palabra>violin</palabra> 
+                <palabra>ukulele</palabra> 
+                <palabra>charango</palabra>
+            </palabrasClave>
+        </perfil>
+        <perfil>
+            <nombre> Cultura saludable </nombre>
+            <palabrasClave>
+                <palabra>gimnasio</palabra> 
+                <palabra>comida saludable</palabra> 
+                <palabra>calistenia</palabra> 
+            </palabrasClave>
+        </perfil>
+    </perfiles>
+    <descartadas>
+        <palabra>a</palabra> 
+        <palabra>un</palabra> 
+        <palabra>una</palabra> 
+        <palabra>en</palabra> 
+        <palabra>para</palabra> 
+        <palabra>por</palabra> 
+        <palabra>unas</palabra> 
+        <palabra>unos</palabra>  
+    </descartadas>
+</configuracion> 
