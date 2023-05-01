@@ -37,13 +37,43 @@ def ObtenerDatos():
                                         if pal.tag == "palabra":
                                             palabraPerfil = pal.text
                                         palabrasClave.append(str(palabraPerfil).strip())
-                            objPerfil = Perfil(name,palabrasClave)
-                            listPerfiles.append(objPerfil)    
+                            #Si la lista está vacia, ingresa datos
+                            if len(listPerfiles) == 0:  
+                                objPerfil = Perfil(str(name).strip(),palabrasClave)
+                                listPerfiles.append(objPerfil)
+                            else:          
+                            #Recorriendo lista de perfiles
+                                boolValidacion = False
+                                for i in listPerfiles:
+                                    #comparando si el nombre del perfil ya existe
+                                    if i.getNombre().lower() == str(name).lower().strip():
+                                        #si el nombre existe entonces compara si en la lista de palabras se repite algun dato, sino lo agrega
+                                        for k in i.listaPalabrasClave:
+                                            for h in palabrasClave:
+                                                if k.lower() != h.lower():
+                                                    i.listaPalabrasClave.append(h)
+                                        boolValidacion = False
+                                        break
+                                    # Si el nombre del perfil no existe, se agrega a la lista de perfiles el nuevo perfil
+                                    elif i.getNombre().lower() != str(name).lower().strip():
+                                        boolValidacion = True
+                                if boolValidacion == True:
+                                    objPerfil = Perfil(str(name).strip(),palabrasClave)
+                                    listPerfiles.append(objPerfil) 
             elif dat.tag == "descartadas":
                 for des in dat:
                     if des.tag == 'palabra':
                         palabra_descartada = des.text
-                    palabrasDescartadas.append(str(palabra_descartada).strip())
+                    if len(palabrasDescartadas) == 0:
+                        palabrasDescartadas.append(str(palabra_descartada).strip())
+                    else:
+                        if palabra_descartada in palabrasDescartadas:
+                            pass
+                        else:
+                            palabrasDescartadas.append(str(palabra_descartada).strip())
+                        
+
+        '''
         print('Palabras Descartadas')
         for j in palabrasDescartadas:
             print(j)
@@ -51,7 +81,7 @@ def ObtenerDatos():
         for i in listPerfiles:
             print(i.getNombre())
             for k in i.listaPalabrasClave:
-                print(k)
+                print(k)'''
         return jsonify({'message':'Archivo leído correctamente',})
     except:
         return jsonify({"message": "Ha ocurrido un error"})
