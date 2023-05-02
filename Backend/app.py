@@ -20,6 +20,9 @@ def inicio():
 def ObtenerDatos():
     global palabrasDescartadas
     global listPerfiles
+    contadorNuevos = 0
+    contadorExistentes = 0
+    contadorDescartadas = 0
     try:
         archivo = request.data.decode('utf-8')
         raiz = et.XML(archivo)
@@ -41,7 +44,7 @@ def ObtenerDatos():
                             if len(listPerfiles) == 0:  
                                 objPerfil = Perfil(str(name).strip(),palabrasClave)
                                 listPerfiles.append(objPerfil)
-                                print('Estoy aquí en igual a 0')
+                                contadorNuevos += 1
                             elif len(listPerfiles) != 0:          
                             #Recorriendo lista de perfiles
                                 boolValidacion = False
@@ -55,7 +58,7 @@ def ObtenerDatos():
                                             aux.append(h)
                                             i.listaPalabrasClave = aux
                                         boolValidacion = False
-                                        print('estoy aqui en validaciones booleanas en false')
+                                        contadorExistentes += 1
                                         break
                                     # Si el nombre del perfil no existe, se agrega a la lista de perfiles el nuevo perfil
                                     elif i.getNombre().lower().strip() != str(name).lower().strip():
@@ -63,24 +66,26 @@ def ObtenerDatos():
                                 if boolValidacion == True:
                                     objPerfil = Perfil(str(name).strip(),palabrasClave)
                                     listPerfiles.append(objPerfil) 
-                                    print(str(name))
+                                    contadorNuevos += 1
+                                    #print(str(name))
             elif dat.tag == "descartadas":
                 for des in dat:
                     if des.tag == 'palabra':
                         palabra_descartada = des.text
                         if len(palabrasDescartadas) == 0:
                             palabrasDescartadas.append(str(palabra_descartada).strip())
-                            print('Estoy aquí en descartadas igual a 0')
+                            contadorDescartadas += 1
                         elif len(palabrasDescartadas) != 0:
                             if palabra_descartada in palabrasDescartadas:
-                                print('Estoy aquí en descartadas coincidencia de palabra')
                                 pass
                             else:
                                 palabrasDescartadas.append(str(palabra_descartada).strip())
-                                print('Estoy aquí en descartadas diferente a 0')
+                                contadorDescartadas += 1
                         
-
-        
+        print('Se han creado '+ str(contadorNuevos)+ ' perfiles nuevos')
+        print('Se han actualizado '+str(contadorExistentes)+' perfiles existentes')
+        print('Se han creado '+str(contadorDescartadas)+' nuevas palabras a descartar')
+        '''
         print('Palabras Descartadas')
         print(len(palabrasDescartadas))
         for j in palabrasDescartadas:
@@ -91,7 +96,7 @@ def ObtenerDatos():
             print('\n'+i.getNombre())
             for k in i.listaPalabrasClave:
                 print(k)
-        
+        '''
         return jsonify({'message':'Archivo leído correctamente',})
     except:
         return jsonify({"message": "Ha ocurrido un error"})
