@@ -1,5 +1,6 @@
 from flask import Flask,request, jsonify,Response
 import xml.etree.ElementTree as et
+import xml.etree.cElementTree as ET
 import os
 from subprocess import check_output
 from solicitudUno import Perfil
@@ -82,9 +83,24 @@ def ObtenerDatos():
                                 palabrasDescartadas.append(str(palabra_descartada).strip())
                                 contadorDescartadas += 1
                         
-        print('Se han creado '+ str(contadorNuevos)+ ' perfiles nuevos')
-        print('Se han actualizado '+str(contadorExistentes)+' perfiles existentes')
-        print('Se han creado '+str(contadorDescartadas)+' nuevas palabras a descartar')
+        cadenaNuevos = 'Se han creado '+ str(contadorNuevos)+ ' perfiles nuevos'
+        cadenaExistentes = 'Se han actualizado '+str(contadorExistentes)+' perfiles existentes'
+        cadenaDescartar = 'Se han creado '+str(contadorDescartadas)+' nuevas palabras a descartar'
+
+        #ESCRIBIENDO ARCHIVO CON RESPUESTAS
+        root = ET.Element('respuesta')
+        ET.SubElement(root,'perfilesNuevos').text= str(cadenaNuevos)
+        ET.SubElement(root,'perfilesExistentes').text= str(cadenaExistentes)
+        ET.SubElement(root,'descartadas').text= str(cadenaDescartar)
+        ET.indent(root)
+        archivo_Respuesta1XML = ET.ElementTree(root)
+        archivo_Respuesta1XML.write('ArchivosPrueba\Solicitud1Respuesta'+'.xml')
+
+        leerRespuestaUno = open('ArchivosPrueba\Solicitud1Respuesta.xml','r')
+        almacenarRespuesta = '<?xml version="1.0"?>\n'
+        almacenarRespuesta += leerRespuestaUno.read()
+        leerRespuestaUno.close()
+
         '''
         print('Palabras Descartadas')
         print(len(palabrasDescartadas))
@@ -97,9 +113,9 @@ def ObtenerDatos():
             for k in i.listaPalabrasClave:
                 print(k)
         '''
-        return jsonify({'message':'Archivo leído correctamente',})
+        return almacenarRespuesta
     except:
-        return jsonify({"message": "Ha ocurrido un error"})
+        return jsonify({"message": "Ha ocurrido un error en los datos del archivo xml"})
     
 #Ejemplo
 #http://localhost:5000/UsuarioConectado?nombreUser=Oscar Leon
