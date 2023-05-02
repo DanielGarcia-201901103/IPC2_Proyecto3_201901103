@@ -2,11 +2,16 @@ from flask import Flask,request, jsonify,Response
 import xml.etree.ElementTree as et
 import xml.etree.cElementTree as ET
 import os
+import re
 from subprocess import check_output
 from solicitudUno import Perfil
+from solicitudDos import Mensaje
 
+#LISTAS PARA PERFILES
 palabrasDescartadas = []
 listPerfiles = []
+#LISTAS PARA MENSAJES
+listMensajes = []
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -16,9 +21,9 @@ app.config['DEBUG'] = True
 def inicio():
     return '<p>Hola, Bienvenido a ChapinChat</p>'
 
-#CARGANDO DATOS PARA LA SOLICITUD UNO
+#CARGANDO DATOS PARA LA SOLICITUD UNO correspondiente a perfiles
 @app.route("/cargarSolicitudUno",methods=['POST'])
-def ObtenerDatos():
+def cargaPerfiles():
     global palabrasDescartadas
     global listPerfiles
     contadorNuevos = 0
@@ -116,7 +121,23 @@ def ObtenerDatos():
         return almacenarRespuesta
     except:
         return jsonify({"message": "Ha ocurrido un error en los datos del archivo xml"})
-    
+
+#CARGANDO DATOS PARA LA SOLICITUD DOS correspondiente a mensajes  
+@app.route("/cargarSolicitudDos",methods=['POST'])
+def cargarMensajes():
+    global listMensajes
+    try:
+        archivo = request.data.decode('utf-8')
+        raiz = et.XML(archivo)
+        for dat in raiz:
+            if dat.tag == "mensaje":
+                mensaje_TextoCompleto  = dat.text
+                print(mensaje_TextoCompleto)
+        return 'Leído correctamente'
+    except:
+        return jsonify({"message": "Ha ocurrido un error en los datos del archivo xml"})
+
+
 #Ejemplo
 #http://localhost:5000/UsuarioConectado?nombreUser=Oscar Leon
 @app.route("/ConsultarDatos",methods=['GET'])
@@ -142,3 +163,4 @@ if __name__=='_main_':
 
 
 #flask --app hello run
+#Flask --app Backend\app.py run
