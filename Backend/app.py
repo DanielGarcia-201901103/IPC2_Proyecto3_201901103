@@ -132,7 +132,45 @@ def cargarMensajes():
         for dat in raiz:
             if dat.tag == "mensaje":
                 mensaje_TextoCompleto  = dat.text
-                print(mensaje_TextoCompleto)
+                #print(mensaje_TextoCompleto)
+                dato = re.compile('Lugar\s+y\s+Fecha\s*\:\s*(\w+)(\s*|\s*\w+)*(,\s*)(0[1-9]|1[0-9]|2[0-9]|3[0-1])(\/)(0[1-9]|1[0-2])(\/)(\d{4})\s+(0[0-9]|1[0-9]|2[0-3])(:)([0-5][0-9])')
+                result = dato.finditer(str(mensaje_TextoCompleto))
+                lugFech = ''
+                for res in result:
+                    #print(inicio,fin)
+                    lugFech = res.group()
+
+                dato1 = re.compile(' Usuario\s*:\s*(([a-zA-Z-0-9._-]+@[a-zA-Z-0-9._-]+)|([a-zA-Z-0-9._-]+))')
+                result1 = dato1.finditer(str(mensaje_TextoCompleto))
+                usua = ''
+                for res1 in result1:
+                    #print(inicio,fin)
+                    usua = res1.group()
+
+                dato3 = re.compile('Red\s+social\s*:\s*(ChapinChat)')
+                result3 = dato3.finditer(str(mensaje_TextoCompleto))
+                redS = ''
+                for res3 in result3:
+                    #print(inicio,fin)
+                    redS = res3.group()
+                '''fechaL = ''
+                contador = 0
+                while contador < len(result):
+                    fechaL += str(result[contador] )
+                    contador +=1'''
+
+                print(lugFech)
+                print(usua)
+                print(redS)
+                '''
+                EXPRESION PARA LUGAR Y FECHA
+Lugar\s+y\s+Fecha\s*\:\s*(\w+)(\s*|\s*\w+)*(,\s*)(0[1-9]|1[0-9]|2[0-9]|3[0-1])(\/)(0[1-9]|1[0-2])(\/)(\d{4})\s+(0[0-9]|1[0-9]|2[0-3])(:)([0-5][0-9])
+                EXPRESION PARA USUARIO
+                Usuario\s*:\s*(([a-zA-Z-0-9._-]+@[a-zA-Z-0-9._-]+)|([a-zA-Z-0-9._-]+))
+
+                EXPRESION PARA RED
+                Red\s+social\s*:\s*(ChapinChat)
+                '''
         return 'Leído correctamente'
     except:
         return jsonify({"message": "Ha ocurrido un error en los datos del archivo xml"})
