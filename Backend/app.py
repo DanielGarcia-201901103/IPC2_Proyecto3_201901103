@@ -12,6 +12,7 @@ palabrasDescartadas = []
 listPerfiles = []
 #LISTAS PARA MENSAJES
 listMensajes = []
+listAuxUsuarios = []
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -126,7 +127,6 @@ def cargaPerfiles():
 @app.route("/cargarSolicitudDos",methods=['POST'])
 def cargarMensajes():
     global listMensajes
-    contadorMensajesTotal = 0
     try:
         archivo = request.data.decode('utf-8')
         raiz = et.XML(archivo)
@@ -174,10 +174,15 @@ def cargarMensajes():
                 #print(liusua[1].strip())
                 #print(liredS[1].strip())
                 #print(soloMensaje.strip())
+
                 objetoMensaje = Mensaje(str(lislugFech[1]).strip(),str(liusua[1]).strip(),str(liredS[1]).strip(),str(soloMensaje).strip())
                 listMensajes.append(objetoMensaje)
-                contadorMensajesTotal += 1
+                listAuxUsuarios.append(str(liusua[1]).strip())
+        listaSinRepetidos = list(set(listAuxUsuarios))
 
+        print(str(len(listaSinRepetidos)) + 'usuarios distintos')
+        print(str(len(listMensajes)) + 'mensajes en total')
+        print(len(listMensajes))
         '''
         <?xml version="1.0"?> 
         <respuesta> 
@@ -185,14 +190,10 @@ def cargarMensajes():
                 Se procesaron mensajes para 15 usuarios distintos 
             </usuarios> 
             <mensajes> 
-                Se procesaron 40 mensajes en total 
+                Se procesaron 40 +contadorMensajesTotal+ mensajes en total 
             </mensajes> 
         </respuesta> 
         '''
-
-
-
-
 
         '''
                 EXPRESION PARA LUGAR Y FECHA
