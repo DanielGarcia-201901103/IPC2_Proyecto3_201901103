@@ -101,9 +101,9 @@ def cargaPerfiles():
         ET.SubElement(root,'descartadas').text= str(cadenaDescartar)
         ET.indent(root)
         archivo_Respuesta1XML = ET.ElementTree(root)
-        archivo_Respuesta1XML.write('ArchivosPrueba\Solicitud1Respuesta'+'.xml')
+        archivo_Respuesta1XML.write('Backend\ArchivosXML\Solicitud1Respuesta'+'.xml')
 
-        leerRespuestaUno = open('ArchivosPrueba\Solicitud1Respuesta.xml','r')
+        leerRespuestaUno = open('Backend\ArchivosXML\Solicitud1Respuesta.xml','r')
         almacenarRespuesta = '<?xml version="1.0"?>\n'
         almacenarRespuesta += leerRespuestaUno.read()
         leerRespuestaUno.close()
@@ -190,9 +190,9 @@ def cargarMensajes():
         ET.SubElement(root1,'mensajes').text= str(cadenaCantidadMensajes)
         ET.indent(root1)
         archivo_Respuesta2XML = ET.ElementTree(root1)
-        archivo_Respuesta2XML.write('ArchivosPrueba\Solicitud2Respuesta'+'.xml')
+        archivo_Respuesta2XML.write('Backend\ArchivosXML\Solicitud2Respuesta'+'.xml')
 
-        leerRespuestaDos = open('ArchivosPrueba\Solicitud2Respuesta.xml','r')
+        leerRespuestaDos = open('Backend\ArchivosXML\Solicitud2Respuesta.xml','r')
         almacenarRespuesta1 = '<?xml version="1.0"?>\n'
         almacenarRespuesta1 += leerRespuestaDos.read()
         leerRespuestaDos.close()
@@ -240,23 +240,30 @@ def inicializarDatos():
         listAuxUsuarios = []
         return 'Ha regresado al estado inicial'
     except:
-        return jsonify({"message": "Ha ocurrido un error"})
+        return jsonify({"message": "Ha ocurrido un error en reset"})
 
 #Metodo para consultar datos del programador
 @app.route("/consultaEstudiante",methods=['GET'])
 def consultarDatosProgramador():
-    datosEstudiante = 'Josué Daniel Rojché García'
-    datosCarne = '201901103'
-    return jsonify({"Nombre":datosEstudiante, "Carne": datosCarne}) 
-
-#Los metodos anteriores ya funcionan
-@app.route("/recibirMensaje",methods=['GET'])
-def recibirMensaje():
-    #ArchivosPrueba\Solicitud1Respuesta.xml
-    pathTecnico = "Documentacion\documentacion.pdf" 
-    webbrowser.open_new(pathTecnico)
+    try:
+        datosEstudiante = 'Josué Daniel Rojché García'
+        datosCarne = '201901103'
+        return jsonify({"Nombre":datosEstudiante, "Carne": datosCarne}) 
+    except:
+        return jsonify({"message": "Ha ocurrido un error en datos programador"})
     
-    return 'documentacion mostrada'
+#Metodo para consultar la documentación
+@app.route("/visualizandoDocumentacion",methods=['GET'])
+def visualDocumentacion():
+    try:
+        #ArchivosPrueba\Solicitud1Respuesta.xml
+        pathTecnico = "Documentacion\documentacion.pdf" 
+        webbrowser.open_new(pathTecnico)
+    
+        return 'documentacion mostrada'
+    except:
+        return jsonify({"message": "Ha ocurrido un error en consulta documentacion"})
+#Los metodos anteriores ya funcionan
 
 if __name__=='_main_':
     app.run()
