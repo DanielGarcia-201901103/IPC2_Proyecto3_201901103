@@ -30,9 +30,17 @@ Repo de ejemplo del proyecto 3
 
 https://github.com/Teitan67/IPC2_EJEMPLO_PY3
 
+Para crear un proyecto con django
+django-admin startproject nombrecarpeta .
+nombrecarpeta no debe ser como django o test por ejemplo.
+el punto es para no poner una carpeta anidada
+
+para crear mas aplicaciones 
+python manage.py startapp nombreapp
+el nombreapp es cualquiera por ejemplo blog, store, etc.
 
 ejecutar django
-python manage.py runserver
+python Frontend\manage.py runserver
 python manage.py runserver 8080
 python manage.py runserver 0.0.0.0:8000
 
