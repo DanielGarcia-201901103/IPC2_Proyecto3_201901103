@@ -3,6 +3,7 @@ import xml.etree.ElementTree as et
 import xml.etree.cElementTree as ET
 import os
 import re
+import webbrowser
 from subprocess import check_output
 from solicitudUno import Perfil
 from solicitudDos import Mensaje
@@ -121,7 +122,7 @@ def cargaPerfiles():
         '''
         return almacenarRespuesta
     except:
-        return jsonify({"message": "Ha ocurrido un error en los datos del archivo xml"})
+        return "Ha ocurrido un error en los datos del archivo xml"
 
 #CARGANDO DATOS PARA LA SOLICITUD DOS correspondiente a mensajes  
 @app.route("/cargarSolicitudDos",methods=['POST'])
@@ -223,32 +224,45 @@ Lugar\s+y\s+Fecha\s*\:\s*(\w+)(\s*|\s*\w+)*(,\s*)(0[1-9]|1[0-9]|2[0-9]|3[0-1])(\
         '''
         return almacenarRespuesta1
     except:
-        return jsonify({"message": "Ha ocurrido un error en los datos del archivo xml"})
+        return "Ha ocurrido un error en los datos del archivo xml"
 
+#Metodo para inicializar la aplicación, dejarla sin datos
+@app.route("/resetDatos",methods=['DELETE'])
+def inicializarDatos():
+    try:
+        global palabrasDescartadas
+        global listPerfiles
+        global listMensajes
+        global listAuxUsuarios
+        palabrasDescartadas = []
+        listPerfiles = []
+        listMensajes = []
+        listAuxUsuarios = []
+        return 'Ha regresado al estado inicial'
+    except:
+        return jsonify({"message": "Ha ocurrido un error"})
 
-#Ejemplo
-#http://localhost:5000/UsuarioConectado?nombreUser=Oscar Leon
-@app.route("/ConsultarDatos",methods=['GET'])
-def consultarDatos():
-    nombreUser = request.args.get('nombreUser')
-    print(str(nombreUser))
-    return jsonify({"Nombre":nombreUser})  
+#Metodo para consultar datos del programador
+@app.route("/consultaEstudiante",methods=['GET'])
+def consultarDatosProgramador():
+    datosEstudiante = 'Josué Daniel Rojché García'
+    datosCarne = '201901103'
+    return jsonify({"Nombre":datosEstudiante, "Carne": datosCarne}) 
 
-@app.route("/consultarXfecha",methods=['GET'])
-def consultarXFecha():
-    nombreUser = request.args.get('nombreUser')
-    print(str(nombreUser))
-    return jsonify({"Nombre":nombreUser}) 
-
+#Los metodos anteriores ya funcionan
 @app.route("/recibirMensaje",methods=['GET'])
 def recibirMensaje():
-    texto = request.args.get("asdf")
-    return texto
+    #ArchivosPrueba\Solicitud1Respuesta.xml
+    pathTecnico = "Documentacion\documentacion.pdf" 
+    webbrowser.open_new(pathTecnico)
+    
+    return 'documentacion mostrada'
 
 if __name__=='_main_':
     app.run()
 #https://github.com/Teitan67/IPC2_EJEMPLO_PY3/blob/main/backend/main.py
-
+#Ejemplo
+#http://localhost:5000/UsuarioConectado?nombreUser=Oscar Leon
 
 #flask --app hello run
 #Flask --app Backend\app.py run
