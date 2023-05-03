@@ -238,7 +238,7 @@ def inicializarDatos():
         listPerfiles = []
         listMensajes = []
         listAuxUsuarios = []
-        return 'Ha regresado al estado inicial'
+        return jsonify({"message": "Ha regresado al estado inicial"})
     except:
         return jsonify({"message": "Ha ocurrido un error en reset"})
 
@@ -248,6 +248,7 @@ def consultarDatosProgramador():
     try:
         datosEstudiante = 'Josué Daniel Rojché García'
         datosCarne = '201901103'
+        #jsonify({"Nombre":datosEstudiante, "Carne": datosCarne}) 
         return jsonify({"Nombre":datosEstudiante, "Carne": datosCarne}) 
     except:
         return jsonify({"message": "Ha ocurrido un error en datos programador"})

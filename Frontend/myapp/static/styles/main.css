@@ -1,0 +1,40 @@
+header{
+	background-color: #BBBBBB;
+	padding: 60px 0;
+}
+
+.caja{
+	width: 940px;
+	position: relative;
+	margin:0 auto;
+}
+
+nav{
+	position: absolute;
+	top:2px;
+	right: 40;
+}
+
+nav li{
+	display: inline;
+	margin: 0 0 0 15px;
+}
+
+nav a{
+	text-transform: uppercase;
+	color: #000000;
+	font-weight: bold;
+	font-size: 22px;
+	text-decoration: none;
+}
+/*la propiedad hover es el que captura
+el movimiento del mouse*/
+nav a:hover{
+	color: #c78c19;
+	text-decoration: underline;
+}
+
+main{
+	width: 940px;
+	margin: 0 auto;
+}

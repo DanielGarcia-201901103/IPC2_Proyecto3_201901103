@@ -53,3 +53,14 @@ https://drive.google.com/file/d/12rxjy-ehUKqZjpxNoFiFoukImgtrGoq9/view?usp=share
 https://drive.google.com/file/d/1yDVDFoh2DJ0kl5sBHHdKrXDrlm510PE-/view?usp=share_link
 https://drive.google.com/file/d/1tmW-eSZUKZ1oyYwPT6nUdjAVwGOaiGNn/view?usp=share_link
 https://drive.google.com/file/d/1lQ5UJBEK44Ze282cDK7xbcenG9IFOhem/view?usp=share_link
+
+
+
+
+https://www.youtube.com/watch?v=T1intZyhXDU&t=6779s
+
+
+<img src="{% static 'bg.jpg' %}" alt="Mi imagen">
+
+
+https://www.w3schools.com/python/ref_requests_get.asp

@@ -1,0 +1,16 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+
+{% for user in username %}
+
+{% if user == False %}
+<p>⏰ pendiente</p>
+{% else %}
+<p>✅ Realizada</p>
+{% endif %}
+<h1>{{user}}</h1>
+{% endfor %}
+<button>
+    ✅ Done
+</button>
+{% endblock %}
