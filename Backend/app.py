@@ -180,19 +180,33 @@ def cargarMensajes():
                 listAuxUsuarios.append(str(liusua[1]).strip())
         listaSinRepetidos = list(set(listAuxUsuarios))
 
-        print(str(len(listaSinRepetidos)) + 'usuarios distintos')
-        print(str(len(listMensajes)) + 'mensajes en total')
-        print(len(listMensajes))
+        cadenaCantidadUsuariosUnicos = 'Se procesaron mensajes para '+str(len(listaSinRepetidos))+' usuarios distintos'
+        cadenaCantidadMensajes = 'Se procesaron '+str(len(listMensajes))+' mensajes en total'
+
+        #ESCRIBIENDO ARCHIVO CON RESPUESTAS
+        root1 = ET.Element('respuesta')
+        ET.SubElement(root1,'usuarios').text= str(cadenaCantidadUsuariosUnicos)
+        ET.SubElement(root1,'mensajes').text= str(cadenaCantidadMensajes)
+        ET.indent(root1)
+        archivo_Respuesta2XML = ET.ElementTree(root1)
+        archivo_Respuesta2XML.write('ArchivosPrueba\Solicitud2Respuesta'+'.xml')
+
+        leerRespuestaDos = open('ArchivosPrueba\Solicitud2Respuesta.xml','r')
+        almacenarRespuesta1 = '<?xml version="1.0"?>\n'
+        almacenarRespuesta1 += leerRespuestaDos.read()
+        leerRespuestaDos.close()
+
         '''
-        <?xml version="1.0"?> 
-        <respuesta> 
-            <usuarios> 
-                Se procesaron mensajes para 15 usuarios distintos 
-            </usuarios> 
-            <mensajes> 
-                Se procesaron 40 +contadorMensajesTotal+ mensajes en total 
-            </mensajes> 
-        </respuesta> 
+        print('Palabras Descartadas')
+        print(len(palabrasDescartadas))
+        for j in palabrasDescartadas:
+            print(j)
+        print('\nPerfiles')
+        print(len(listPerfiles))
+        for i in listPerfiles:
+            print('\n'+i.getNombre())
+            for k in i.listaPalabrasClave:
+                print(k)
         '''
 
         '''
@@ -207,7 +221,7 @@ Lugar\s+y\s+Fecha\s*\:\s*(\w+)(\s*|\s*\w+)*(,\s*)(0[1-9]|1[0-9]|2[0-9]|3[0-1])(\
                 EXPRESION REGULAR PARA MENSAJE
                 ChapinChat\s*(\s*[A-Za-z-09]*.*)*
         '''
-        return 'Leído correctamente'
+        return almacenarRespuesta1
     except:
         return jsonify({"message": "Ha ocurrido un error en los datos del archivo xml"})
 
