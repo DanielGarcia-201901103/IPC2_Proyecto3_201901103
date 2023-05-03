@@ -126,6 +126,7 @@ def cargaPerfiles():
 @app.route("/cargarSolicitudDos",methods=['POST'])
 def cargarMensajes():
     global listMensajes
+    contadorMensajesTotal = 0
     try:
         archivo = request.data.decode('utf-8')
         raiz = et.XML(archivo)
@@ -169,11 +170,31 @@ def cargarMensajes():
                     fechaL += str(result[contador] )
                     contador +=1'''
 
-                print(lislugFech[1].strip())
-                print(liusua[1].strip())
-                print(liredS[1].strip())
-                print(soloMensaje.strip())
-                '''
+                #print(lislugFech[1].strip())
+                #print(liusua[1].strip())
+                #print(liredS[1].strip())
+                #print(soloMensaje.strip())
+                objetoMensaje = Mensaje(str(lislugFech[1]).strip(),str(liusua[1]).strip(),str(liredS[1]).strip(),str(soloMensaje).strip())
+                listMensajes.append(objetoMensaje)
+                contadorMensajesTotal += 1
+
+        '''
+        <?xml version="1.0"?> 
+        <respuesta> 
+            <usuarios> 
+                Se procesaron mensajes para 15 usuarios distintos 
+            </usuarios> 
+            <mensajes> 
+                Se procesaron 40 mensajes en total 
+            </mensajes> 
+        </respuesta> 
+        '''
+
+
+
+
+
+        '''
                 EXPRESION PARA LUGAR Y FECHA
 Lugar\s+y\s+Fecha\s*\:\s*(\w+)(\s*|\s*\w+)*(,\s*)(0[1-9]|1[0-9]|2[0-9]|3[0-1])(\/)(0[1-9]|1[0-2])(\/)(\d{4})\s+(0[0-9]|1[0-9]|2[0-3])(:)([0-5][0-9])
                 EXPRESION PARA USUARIO
@@ -184,7 +205,7 @@ Lugar\s+y\s+Fecha\s*\:\s*(\w+)(\s*|\s*\w+)*(,\s*)(0[1-9]|1[0-9]|2[0-9]|3[0-1])(\
 
                 EXPRESION REGULAR PARA MENSAJE
                 ChapinChat\s*(\s*[A-Za-z-09]*.*)*
-                '''
+        '''
         return 'Leído correctamente'
     except:
         return jsonify({"message": "Ha ocurrido un error en los datos del archivo xml"})
