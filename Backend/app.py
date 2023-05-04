@@ -13,6 +13,7 @@ palabrasDescartadas = []
 listPerfiles = []
 #LISTAS PARA MENSAJES
 listMensajes = []
+#Esta lista solo sirve para manejar los datos del metodo cargarMensajes
 listAuxUsuarios = []
 
 app = Flask(__name__)
@@ -367,6 +368,14 @@ def solicitudesCreacionMensajes():
         return almacenarRespuesta1
     except:
         return "Ha ocurrido un error en los datos del archivo xml"
+
+
+
+#Obtener la lista de mensajes, lista de perfiles y lista de palabras excluidas
+def calcularPorcentajesYPesos():
+    #Primer paso obtener el mensaje
+    # Segundo paso eliminar signos 
+    pass 
 
 if __name__=='_main_':
     app.run()
