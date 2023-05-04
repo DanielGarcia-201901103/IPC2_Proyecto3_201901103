@@ -1,9 +1,26 @@
 {% extends 'layouts/base.html' %}
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/ayuda.css' %}">
 
-{% for datE in diccionario %}
-<p>{{datE}}</p>
-<br>
-{% endfor %}
+<ul class="datosProgramador">
+    <li>
+        <h2>Información del Estudiante</h2>
+        <p class="datosProgramador-descripcion">Nombre:</p>
+        <p class="datosProgramador-valor">{{nombre}}</p>
+        <br>
+        <p class="datosProgramador-descripcion">Carné:</p>
+        <p class="datosProgramador-valor">{{carne}}</p>
+    </li>
+    <li>
+        <h2>Ver Documentación</h2>
+        <form method="get">
+            <input type="submit" value="Abrir">
+        </form>
+        {% if respuesta_servidor %}
+        <p>{{ respuesta_servidor }}</p>
+        {% endif %}
+    </li>
+</ul>
 
 {% endblock %}

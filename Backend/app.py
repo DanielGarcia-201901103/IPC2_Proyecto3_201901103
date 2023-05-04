@@ -261,9 +261,9 @@ def visualDocumentacion():
         pathTecnico = "Documentacion\documentacion.pdf" 
         webbrowser.open_new(pathTecnico)
     
-        return 'documentacion mostrada'
+        return "documentacion mostrada"
     except:
-        return jsonify({"message": "Ha ocurrido un error en consulta documentacion"})
+        return "Ha ocurrido un error en consulta documentacion"
 #Los metodos anteriores ya funcionan
 
 if __name__=='_main_':

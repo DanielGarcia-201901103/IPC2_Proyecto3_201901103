@@ -1,0 +1,87 @@
+.datosProgramador{
+	width: 940px;
+	position: relative;
+	margin:0 auto;
+	padding: 60px;
+}
+
+.datosProgramador li{
+	display: inline-block;
+	text-align: center;
+	width: 40%;
+	vertical-align: top;
+	margin: 0 1%;
+	padding: 30px 20px;
+	box-sizing: border-box;
+	border: 2px solid #000000;
+	/**
+	la linea border equivale a estas 3 lineas
+	border-color: #000000;
+	border-width: 2px;
+	border-style: solid;
+	**/
+	border-radius: 10px;
+	/**
+	border-radius: 10px 25px 40px 50px;
+	**/
+}
+
+.datosProgramador li:hover{
+	border-color: #c78c19;
+}
+
+/*active captura el click del mouse*/
+.datosProgramador li:active{
+	border-color: #088c19;
+}
+
+.datosProgramador h2{
+	font-size: 30px;
+	font-weight: bold;
+    padding-block-end: 20px;
+}
+
+.datosProgramador li:hover h2{
+	font-size: 33px;
+}
+
+.datosProgramador-descripcion{
+	font-size: 20px;
+    color: #c78c19;
+    padding-block-end: 20px;
+}
+.datosProgramador-valor{
+	font-size: 20px;
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+input[type=submit]:active {
+    background-color: #83a045;
+}
+.checkbox{
+	margin: 20px 0;
+}

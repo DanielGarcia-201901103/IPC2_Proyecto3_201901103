@@ -64,3 +64,8 @@ https://www.youtube.com/watch?v=T1intZyhXDU&t=6779s
 
 
 https://www.w3schools.com/python/ref_requests_get.asp
+
+
+{% for datE in diccionario %}
+{{diccionario}}
+{% endfor %}
