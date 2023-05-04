@@ -1,3 +1,4 @@
+import re
 def calcularPorcentajesYPesos():
     excluidas=['a', 'un', 'una', 'en', 'para', 'por', 'que', 'qué', 'la', 'las', 'los', 'el', 'unas', 'si', 'no', 'sino', 'entre', 
 'otro', 'otra', 'otros', 'otras', 'de', 'del', 'nos', 'sus', 'su', 'am', 'pm']
@@ -11,7 +12,8 @@ Taco Bell a las 7 pm. ' ?¡?¿!"#$%$&/()='¿|°¬\~``][^{´´-.-,<>'''
     
     #tercer paso separar todas las palabras en una lista sin los espacios
     listapalabras = mensaje.split()
-    print(listapalabras)
+    #print(listapalabras)
+    #cuarto paso eliminar las palabras excluidas y tambien eliminar los numeros como digitos
     mensajesinExcluidas = ''
     for cpalabra in listapalabras:
         if cpalabra.lower() in [eliminar.lower() for eliminar in excluidas]:
@@ -22,4 +24,10 @@ Taco Bell a las 7 pm. ' ?¡?¿!"#$%$&/()='¿|°¬\~``][^{´´-.-,<>'''
             else:  
                 mensajesinExcluidas += str(cpalabra)+' ' 
     print(mensajesinExcluidas)
+    
+    listapalabrasEncuenta = mensajesinExcluidas.split()
+    print(len(listapalabrasEncuenta))
+
+
+calcularPorcentajesYPesos()
     
