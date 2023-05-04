@@ -1,12 +1,16 @@
 class Mensaje:
-    def __init__(self, lugarFecha, usuario, redSocial, textoMensaje):
-        self.lugarFecha = lugarFecha
+    def __init__(self, lugar, fechaHora, usuario, redSocial, textoMensaje):
+        self.lugar = lugar
+        self.fechaHora = fechaHora
         self.usuario = usuario
         self.redSocial = redSocial
         self.textoMensaje = textoMensaje
 
-    def getLugarFecha(self):
-        return self.lugarFecha
+    def getLugar(self):
+        return self.lugar
+    
+    def getFechaHora(self):
+        return self.fechaHora
     
     def getUsuario(self):
         return self.usuario
@@ -17,9 +21,12 @@ class Mensaje:
     def getTextoMensaje(self):
         return self.textoMensaje
     
-    def setLugarFecha(self,lugarFecha):
-        self.lugarFecha = lugarFecha
+    def setLugar(self,lugar):
+        self.lugar = lugar
     
+    def setFechaHora(self, fechaHora):
+        self.fechaHora = fechaHora
+
     def setUsuario(self, usuario):
         self.usuario = usuario
 
