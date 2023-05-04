@@ -1,4 +1,5 @@
 import re
+from objetos import Perfil
 def calcularPorcentajesYPesos():
     excluidas=['a', 'un', 'una', 'en', 'para', 'por', 'que', 'qué', 'la', 'las', 'los', 'el', 'unas', 'si', 'no', 'sino', 'entre', 
 'otro', 'otra', 'otros', 'otras', 'de', 'del', 'nos', 'sus', 'su', 'am', 'pm']
@@ -27,7 +28,43 @@ Taco Bell a las 7 pm. ' ?¡?¿!"#$%$&/()='¿|°¬\~``][^{´´-.-,<>'''
     
     listapalabrasEncuenta = mensajesinExcluidas.split()
     print(len(listapalabrasEncuenta))
+    totalPalabrasSINEXCLUIDAS = len(listapalabrasEncuenta)
+    perfil1 = 'Deportista'
+    listaPerfil1 = ['fútbol', 'balonmano', 'baloncesto', 'balompié', 'football', 'basketball', 'handball', 'estadio', 'selección', 'champions league', 'liga de campeones', 'tenis', 'natación', 'olimpiada', 'gym', 'gimnasio']
 
+    perfil2 = 'Cultura saludable '
+    listaPerfil2 = ['gimnasio', 'comida saludable', 'ejercicio', 'maratón', 'carrera', 'entreno', 'entrenar', 'entrenamiento', 'pesas', 'karate', 'tae kwon do', 'boxeo', 'gym', 'healthy food', 'vitaminas', 'caminata', 'caminar', 'ropa deportiva', 'bebida hidratante', 'bebidas hidratantes']
+    objeto = Perfil(perfil1,listaPerfil1)
+    objeto2 = Perfil(perfil2,listaPerfil2)
+
+    listaPerfilesRealizados = []
+    listaPerfilesRealizados.append(objeto)
+    listaPerfilesRealizados.append(objeto2)
+
+    for i in listaPerfilesRealizados:
+        aux_perfil = i.nombre
+        aux_lista =i.listaPalabrasClave
+        #print(aux_perfil)
+        contadorPalabras = 0
+        for j in aux_lista:
+            if j.lower() in mensajesinExcluidas.lower():
+                #print(j)
+                auxiliarListaPalabrasCoincidencia = j.split()
+                if len(auxiliarListaPalabrasCoincidencia) > 1: 
+                    contadorPalabras += len(auxiliarListaPalabrasCoincidencia)
+                else:
+                    contadorPalabras += 1
+        #print(contadorPalabras)
+        resultadoCalculoPorcentajes = calcularPorcentajes(int(totalPalabrasSINEXCLUIDAS),int(contadorPalabras))
+        print(resultadoCalculoPorcentajes)
+        # Crear una lista donde se almacene la relacion entre el nombre del perfil,porcentaje, mensaje, fecha, lugar, usuario
+
+
+def calcularPorcentajes(totalPalabrasSINEXCLUIDAS,contadorPalabras):
+    if totalPalabrasSINEXCLUIDAS !=0:
+        resultado = (contadorPalabras/totalPalabrasSINEXCLUIDAS*100)
+
+    return resultado
 
 calcularPorcentajesYPesos()
     
