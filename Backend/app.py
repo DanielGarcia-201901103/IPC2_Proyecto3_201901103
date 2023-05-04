@@ -269,69 +269,58 @@ def visualDocumentacion():
     except:
         return "Ha ocurrido un error en consulta documentacion"
 #Los metodos anteriores ya funcionan
-#CARGANDO DATOS PARA PETICIONES Prueba  de  solicitudes  de  creación  de  mensajes
-@app.route("/solicitudCreacionMensajes",methods=['POST'])
+#CARGANDO DATOS PARA PETICIONES Prueba  de  solicitudes  de  creación  de  mensajes, falta manejar perfiles para calculos
+@app.route("/peticionCreacionMensajes",methods=['POST'])
 def solicitudesCreacionMensajes():
     global listMensajes
     try:
         archivo = request.data.decode('utf-8')
         raiz = et.XML(archivo)
-        for dat in raiz:
-            if dat.tag == "mensaje":
-                mensaje_TextoCompleto  = dat.text
-                #print(mensaje_TextoCompleto)
-                dato = re.compile('(Lugar|LUGAR|lugar)\s+(y|Y)\s+(Fecha|fecha|FECHA)\s*\:\s+(\w+)(\s*|\s*\w+)*(,\s*)(0[1-9]|1[0-9]|2[0-9]|3[0-1])(\/)(0[1-9]|1[0-2])(\/)(\d{4})\s+(0[0-9]|1[0-9]|2[0-3])(:)([0-5][0-9])')
-                result = dato.finditer(str(mensaje_TextoCompleto))
-                lugFech = ''
-                for res in result:
-                    #print(inicio,fin)
-                    lugFech = res.group()
-                lislugFech = lugFech.rsplit(": ")
-                #print(lislugFech[1].strip())
-                lislugFech1 = lislugFech[1].rsplit(",")
-                #print(lislugFech1[0].strip())
-                #print(lislugFech1[1].strip())
+        #for dat in raiz:
+        if raiz.tag == "mensaje":
+            mensaje_TextoCompleto  = raiz.text
+            #print(mensaje_TextoCompleto)
+            dato = re.compile('(Lugar|LUGAR|lugar)\s+(y|Y)\s+(Fecha|fecha|FECHA)\s*\:\s+(\w+)(\s*|\s*\w+)*(,\s*)(0[1-9]|1[0-9]|2[0-9]|3[0-1])(\/)(0[1-9]|1[0-2])(\/)(\d{4})\s+(0[0-9]|1[0-9]|2[0-3])(:)([0-5][0-9])')
+            result = dato.finditer(str(mensaje_TextoCompleto))
+            lugFech = ''
+            for res in result:
+                #print(inicio,fin)
+                lugFech = res.group()
+            lislugFech = lugFech.rsplit(": ")
+            #print(lislugFech[1].strip())
+            lislugFech1 = lislugFech[1].rsplit(",")
+            #print(lislugFech1[0].strip())
+            #print(lislugFech1[1].strip())
 
-                dato1 = re.compile('(Usuario|usuario|USUARIO)\s*:\s+(([a-zA-Z-0-9._-]+@[a-zA-Z-0-9._-]+)|([a-zA-Z-0-9._-]+))')
-                result1 = dato1.finditer(str(mensaje_TextoCompleto))
-                usua = ''
-                for res1 in result1:
-                    #print(inicio,fin)
-                    usua = res1.group()
-                liusua = usua.rsplit(": ")
+            dato1 = re.compile('(Usuario|usuario|USUARIO)\s*:\s+(([a-zA-Z-0-9._-]+@[a-zA-Z-0-9._-]+)|([a-zA-Z-0-9._-]+))')
+            result1 = dato1.finditer(str(mensaje_TextoCompleto))
+            usua = ''
+            for res1 in result1:
+                #print(inicio,fin)
+                usua = res1.group()
+            liusua = usua.rsplit(": ")
 
-                dato3 = re.compile('(Red|RED|red)\s+(social|SOCIAL|Social)\s*:\s+(ChapinChat)')
-                result3 = dato3.finditer(str(mensaje_TextoCompleto))
-                redS = ''
-                for res3 in result3:
-                    #print(inicio,fin)
-                    redS = res3.group()
-                liredS = redS.rsplit(": ")
+            dato3 = re.compile('(Red|RED|red)\s+(social|SOCIAL|Social)\s*:\s+(ChapinChat)')
+            result3 = dato3.finditer(str(mensaje_TextoCompleto))
+            redS = ''
+            for res3 in result3:
+                #print(inicio,fin)
+                redS = res3.group()
+            liredS = redS.rsplit(": ")
 
-                dato4 = re.compile('ChapinChat\s*(\s*[A-Za-z-09]*.*)*')
-                result4 = dato4.finditer(str(mensaje_TextoCompleto))
-                soloMensaje = ''
-                for res4 in result4:
-                    soloMensaje = res4.group()
-                soloMensaje = soloMensaje.replace("ChapinChat",'')
-                '''fechaL = ''
-                contador = 0
-                while contador < len(result):
-                    fechaL += str(result[contador] )
-                    contador +=1'''
+            dato4 = re.compile('ChapinChat\s*(\s*[A-Za-z-09]*.*)*')
+            result4 = dato4.finditer(str(mensaje_TextoCompleto))
+            soloMensaje = ''
+            for res4 in result4:
+                soloMensaje = res4.group()
+            soloMensaje = soloMensaje.replace("ChapinChat",'')
+            #print(lislugFech[1].strip())
+            #print(liusua[1].strip())
+            #print(liredS[1].strip())
+            #print(soloMensaje.strip())
 
-                #print(lislugFech[1].strip())
-                #print(liusua[1].strip())
-                #print(liredS[1].strip())
-                #print(soloMensaje.strip())
-
-                objetoMensaje = Mensaje(str(lislugFech1[0]).strip(),str(lislugFech1[1]).strip(),str(liusua[1]).strip(),str(liredS[1]).strip(),str(soloMensaje).strip())
-                listMensajes.append(objetoMensaje)
-                listAuxUsuarios.append(str(liusua[1]).strip())
-        listaSinRepetidos = list(set(listAuxUsuarios))
-
-        cadenaCantidadUsuariosUnicos = 'Se procesaron mensajes para '+str(len(listaSinRepetidos))+' usuarios distintos'
-        cadenaCantidadMensajes = 'Se procesaron '+str(len(listMensajes))+' mensajes en total'
+            objetoMensaje = Mensaje(str(lislugFech1[0]).strip(),str(lislugFech1[1]).strip(),str(liusua[1]).strip(),str(liredS[1]).strip(),str(soloMensaje).strip())
+            listMensajes.append(objetoMensaje)
 
         '''
         <?xml version="1.0"?> 
@@ -350,13 +339,13 @@ def solicitudesCreacionMensajes():
         '''
         #ESCRIBIENDO ARCHIVO CON RESPUESTAS
         root1 = ET.Element('respuesta')
-        ET.SubElement(root1,'fechaHora').text= str(cadenaCantidadUsuariosUnicos)
-        ET.SubElement(root1,'usuario').text= str(cadenaCantidadMensajes)
+        ET.SubElement(root1,'fechaHora').text= str(lislugFech1[1]).strip()
+        ET.SubElement(root1,'usuario').text= str(liusua[1]).strip()
         ET.indent(root1)
         archivo_Respuesta2XML = ET.ElementTree(root1)
-        archivo_Respuesta2XML.write('Backend\ArchivosXML\Solicitud2Respuesta'+'.xml')
+        archivo_Respuesta2XML.write('Backend\ArchivosXML\peticionSolicitudCMensajes'+'.xml')
 
-        leerRespuestaDos = open('Backend\ArchivosXML\Solicitud2Respuesta.xml','r')
+        leerRespuestaDos = open('Backend\ArchivosXML\peticionSolicitudCMensajes.xml','r')
         almacenarRespuesta1 = '<?xml version="1.0"?>\n'
         almacenarRespuesta1 += leerRespuestaDos.read()
         leerRespuestaDos.close()
@@ -378,6 +367,7 @@ def solicitudesCreacionMensajes():
         return almacenarRespuesta1
     except:
         return "Ha ocurrido un error en los datos del archivo xml"
+
 if __name__=='_main_':
     app.run()
 #https://github.com/Teitan67/IPC2_EJEMPLO_PY3/blob/main/backend/main.py
