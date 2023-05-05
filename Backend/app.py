@@ -327,6 +327,8 @@ def solicitudesCreacionMensajes():
 
             listMensajes.append(objetoMensaje)
 
+        calculos.calcularPeso(listMensajes)
+
         '''
         <?xml version="1.0"?> 
         <respuesta> 
@@ -383,13 +385,23 @@ def solicitudesCreacionMensajes():
     except:
         return "Ha ocurrido un error en los datos del archivo xml"
 
+@app.route("/resumenPesosporUsuario",methods=['GET'])
+def pesosPorUsuario():
+    try:
+        pass
+        return jsonify({"Nombre":'falta realizar los calculos'}) 
+    except:
+        return jsonify({"message": "Ha ocurrido un error"})
 
-
-#Obtener la lista de mensajes, lista de perfiles y lista de palabras excluidas
-def calcularPorcentajesYPesos():
-    #Primer paso obtener el mensaje
-    # Segundo paso eliminar signos 
-    pass 
+@app.route("/detalleMensajesporUsuario",methods=['GET'])
+def detalleMensajesPorUsuario():
+    try:
+        #Obtener la fecha por la cual se va buscar
+        
+        pass
+        return jsonify({"Nombre":'falta realizar los calculos'}) 
+    except:
+        return jsonify({"message": "Ha ocurrido un error"})
 
 if __name__=='_main_':
     app.run()

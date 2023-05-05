@@ -19,10 +19,10 @@ def calcularDatos(listPerfiles,palabrasDescartadas,soloMensaje):
                 pass
             else:  
                 mensajesinExcluidas += str(cpalabra)+' ' 
-    print(mensajesinExcluidas)
+    #print(mensajesinExcluidas)
     
     listapalabrasEncuenta = mensajesinExcluidas.split()
-    print(len(listapalabrasEncuenta))
+    #print(len(listapalabrasEncuenta))
     totalPalabrasSINEXCLUIDAS = len(listapalabrasEncuenta)
     listaProbabilidades = []
 
@@ -43,7 +43,7 @@ def calcularDatos(listPerfiles,palabrasDescartadas,soloMensaje):
         resultadoCalculoPorcentajes = calcularPorcentajes(int(totalPalabrasSINEXCLUIDAS),int(contadorPalabras))
         
         resultadoTotal = round(resultadoCalculoPorcentajes, 2)
-        print(resultadoCalculoPorcentajes)
+        #print(resultadoCalculoPorcentajes)
 
         objetoProbabilidad = Probabilidad(aux_perfil,resultadoTotal)
         listaProbabilidades.append(objetoProbabilidad)
@@ -57,5 +57,21 @@ def calcularPorcentajes(totalPalabrasSINEXCLUIDAS,contadorPalabras):
         resultado = 0
     return resultado
 
-def calcularPeso():
-    pass
+def calcularPeso(listMensajes):
+    suma = 0
+    for dato in listMensajes:
+        auxListaProbabilidades= dato.listaProbabilidadesCalulados
+        for dato1 in auxListaProbabilidades:
+            auxiliarPerfil = dato1.perfil
+            auxiliarPorcentaje = dato1.porcentaje
+
+    '''
+    obtener la lista de probabilidades
+    buscar todos los usuarios que correspondan al usuario buscado 
+    obtener la lista de probabilidades
+    obtener el perfil
+    obtener el porcentaje
+
+
+    lista que tenga usuario, perfil al que corresponde el peso
+    '''
