@@ -1,12 +1,24 @@
 <respuesta>
-  <fechaHora>01/04/2023 15:21</fechaHora>
-  <usuario>map0002@usac.edu</usuario>
+  <fechaHora>05/06/2023 09:31</fechaHora>
+  <usuario>diegoalva1346</usuario>
   <perfiles>
-    <perfil nombre="Deportista">
-      <porcentajeProbabilidad>10.71 %</porcentajeProbabilidad>
+    <perfil nombre="deportista">
+      <porcentajeProbabilidad>1.19 %</porcentajeProbabilidad>
     </perfil>
-    <perfil nombre="Cultura saludable">
-      <porcentajeProbabilidad>25.0 %</porcentajeProbabilidad>
+    <perfil nombre="pintor">
+      <porcentajeProbabilidad>2.38 %</porcentajeProbabilidad>
+    </perfil>
+    <perfil nombre="cocinero">
+      <porcentajeProbabilidad>14.29 %</porcentajeProbabilidad>
+    </perfil>
+    <perfil nombre="corredor">
+      <porcentajeProbabilidad>4.76 %</porcentajeProbabilidad>
+    </perfil>
+    <perfil nombre="ingeniero">
+      <porcentajeProbabilidad>1.19 %</porcentajeProbabilidad>
+    </perfil>
+    <perfil nombre="musico">
+      <porcentajeProbabilidad>2.38 %</porcentajeProbabilidad>
     </perfil>
   </perfiles>
 </respuesta>

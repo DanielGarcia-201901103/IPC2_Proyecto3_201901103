@@ -57,13 +57,17 @@ def calcularPorcentajes(totalPalabrasSINEXCLUIDAS,contadorPalabras):
         resultado = 0
     return resultado
 
-def calcularPeso(listMensajes):
+def calcularPeso(listMensajes, usuarioBuscar):
     suma = 0
     for dato in listMensajes:
         auxListaProbabilidades= dato.listaProbabilidadesCalulados
-        for dato1 in auxListaProbabilidades:
-            auxiliarPerfil = dato1.perfil
-            auxiliarPorcentaje = dato1.porcentaje
+        buscarCoincidenciaUser =dato.usuario
+        if buscarCoincidenciaUser.lower() == usuarioBuscar.lower():
+            for dato1 in auxListaProbabilidades:
+                auxiliarPerfil = dato1.perfil
+                auxiliarPorcentaje = dato1.porcentaje
+                #comparar los perfiles, si el perfil actual es igual a los siguientes perfiles entonces hacer calculo de peso
+                #luego guardar el peso, junto al perfil, y el usuario en una lista y retornarlo 
 
     '''
     obtener la lista de probabilidades

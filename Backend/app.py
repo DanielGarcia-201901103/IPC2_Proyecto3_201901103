@@ -323,11 +323,12 @@ def solicitudesCreacionMensajes():
             #print(soloMensaje.strip())
 
             listaProbabilidadesCalulados = calculos.calcularDatos(listPerfiles,palabrasDescartadas,str(soloMensaje).strip())
+
             objetoMensaje = Mensaje(str(lislugFech1[0]).strip(),str(lislugFech1[1]).strip(),str(liusua[1]).strip(),str(liredS[1]).strip(),str(soloMensaje).strip(), listaProbabilidadesCalulados)
 
             listMensajes.append(objetoMensaje)
 
-        calculos.calcularPeso(listMensajes)
+            #listaPesosCalculados = calculos.calcularPeso(listMensajes, str(liusua[1]).strip())
 
         '''
         <?xml version="1.0"?> 
@@ -349,13 +350,12 @@ def solicitudesCreacionMensajes():
         ET.SubElement(root1,'fechaHora').text= str(lislugFech1[1]).strip()
         ET.SubElement(root1,'usuario').text= str(liusua[1]).strip()
         perfs = ET.SubElement(root1,'perfiles')
-        for i in listMensajes:
-            auxListaProbabilidades= i.listaProbabilidadesCalulados
-            for j in auxListaProbabilidades:
-                auxiliarPerfil =j.perfil
-                auxiliarPorcentaje = j.porcentaje
-                perf = ET.SubElement(perfs,'perfil', nombre = str(auxiliarPerfil))
-                ET.SubElement(perf,'porcentajeProbabilidad').text= str(str(auxiliarPorcentaje)+' %')
+        
+        for j in listaProbabilidadesCalulados:
+            auxiliarPerfil = j.perfil
+            auxiliarPorcentaje = j.porcentaje
+            perf = ET.SubElement(perfs,'perfil', nombre = str(auxiliarPerfil))
+            ET.SubElement(perf,'porcentajeProbabilidad').text= str(str(auxiliarPorcentaje)+' %')
 
 
         ET.indent(root1)
@@ -366,20 +366,6 @@ def solicitudesCreacionMensajes():
         almacenarRespuesta1 = '<?xml version="1.0"?>\n'
         almacenarRespuesta1 += leerRespuestaDos.read()
         leerRespuestaDos.close()
-
-        '''
-        print('Palabras Descartadas')
-        print(len(palabrasDescartadas))
-        for j in palabrasDescartadas:
-            print(j)
-        print('\nPerfiles')
-        print(len(listPerfiles))
-        for i in listPerfiles:
-            print('\n'+i.getNombre())
-            for k in i.listaPalabrasClave:
-                print(k)
-        '''
-
         
         return almacenarRespuesta1
     except:
