@@ -1,16 +1,26 @@
 {% extends 'layouts/base.html' %}
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/ayuda.css' %}">
 
-{% for user in username %}
+<ul class="datosProgramador">
+    <li>
+        <h2>Perfiles y Palabras Descartadas</h2>
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div>
+            <label for="mensaje">Archivo:</label>
+            <input type="file" name="mensaje" id="mensaje" required>
+            </div>
+            <br>
+            <input type="submit" value="Enviar">
+        </form>
+    </li>
+    <li>
+        {% if respuesta_servidor %}
+        <textarea cols="40" rows="30" id="mensaje2" class="input-padron" required>{{ respuesta_servidor }}</textarea>
+        {% endif %}
+    </li>
+</ul>
 
-{% if user == False %}
-<p>⏰ pendiente</p>
-{% else %}
-<p>✅ Realizada</p>
-{% endif %}
-<h1>{{user}}</h1>
-{% endfor %}
-<button>
-    ✅ Done
-</button>
 {% endblock %}

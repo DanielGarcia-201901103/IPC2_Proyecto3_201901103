@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 import requests
 import json
+import xml.etree.ElementTree as ET
 # Create your views here.
 
 def index(request):
@@ -10,18 +11,36 @@ def index(request):
         'title': title
     })
 
-def servicio(request):
-    username = ['a', 'b','c','d', 'e',False,'f']
-    return render(request, 'solicitarServicio.html',{
-        'username': username
-    })
-
 def peticiones(request):
     username = ['a', 'b','c','d', 'e',False,'f']
     return render(request, 'peticiones.html',{
         'username': username
     })
 
+def servicio(request):
+    if request.method == 'POST':
+        archivo = request.FILES['mensaje']
+        headers = {'Content-Type': 'application/xml'}
+        response = requests.post('http://127.0.0.1:5000/cargarSolicitudUno', data=archivo.read(), headers=headers)
+
+        if response.status_code==200:
+            print("Correcto")
+            datosxml = response.text
+            #parsed_xml = ET.fromstring(datosxml)
+            #sorted_xml = ET.ElementTree(parsed_xml)
+            #sorted_xml.write('sorted_xml.xml', encoding='utf-8', xml_declaration= True)
+            #with open('sorted_xml.xml', 'r') as file:
+            #    sorted_xml_data = file.read()
+            respuesta_servidor = datosxml
+
+            return render(request, 'solicitarServicio.html',{'respuesta_servidor':respuesta_servidor})
+        else:
+            print("incorrecto")
+            return render(request, 'solicitarServicio.html',{'respuesta_servidor':'Incorrecto'})    
+    else:
+        return render(request, 'solicitarServicio.html',{'respuesta_servidor':''})
+#Enlace para resolver algunos errores    
+#https://sydjameer.medium.com/how-to-resolve-forbidden-403-if-django-csrf-mechanism-has-not-been-used-in-post-method-1aeeb8540404
 def limpiar(request):
     response = requests.delete('http://127.0.0.1:5000/resetDatos')
     return render(request, 'limpiar.html')

@@ -64,7 +64,7 @@ input[type=text], select {
     box-sizing: border-box;
 }
 
-input[type=submit] {
+input[type=button] {
     width: 100%;
     background-color: #4CAF50;
     color: white;
@@ -75,13 +75,18 @@ input[type=submit] {
     cursor: pointer;
 }
 
-input[type=submit]:hover {
+input[type=button]:hover {
     background-color: #45a049;
 }
 
-input[type=submit]:active {
+input[type=button]:active {
     background-color: #83a045;
 }
 .checkbox{
 	margin: 20px 0;
+}
+
+.mensajeBienvenida{
+	font-family: "math";
+	padding-top: 14px 20px;
 }
