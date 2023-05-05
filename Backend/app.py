@@ -7,7 +7,7 @@ import webbrowser
 from subprocess import check_output
 from solicitudUno import Perfil
 from solicitudDos import Mensaje
-
+import calculos
 #LISTAS PARA PERFILES
 palabrasDescartadas = []
 listPerfiles = []
@@ -180,8 +180,10 @@ def cargarMensajes():
                 #print(liusua[1].strip())
                 #print(liredS[1].strip())
                 #print(soloMensaje.strip())
+                listaProbabilidadesCalulados = calculos.calcularDatos(listPerfiles,palabrasDescartadas,str(soloMensaje).strip())
 
-                objetoMensaje = Mensaje(str(lislugFech1[0]).strip(),str(lislugFech1[1]).strip(),str(liusua[1]).strip(),str(liredS[1]).strip(),str(soloMensaje).strip())
+                objetoMensaje = Mensaje(str(lislugFech1[0]).strip(),str(lislugFech1[1]).strip(),str(liusua[1]).strip(),str(liredS[1]).strip(),str(soloMensaje).strip(), listaProbabilidadesCalulados)
+
                 listMensajes.append(objetoMensaje)
                 listAuxUsuarios.append(str(liusua[1]).strip())
         listaSinRepetidos = list(set(listAuxUsuarios))

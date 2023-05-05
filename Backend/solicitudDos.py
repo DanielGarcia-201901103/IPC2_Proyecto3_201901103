@@ -1,10 +1,11 @@
 class Mensaje:
-    def __init__(self, lugar, fechaHora, usuario, redSocial, textoMensaje):
+    def __init__(self, lugar, fechaHora, usuario, redSocial, textoMensaje, listaProbabilidadesCalulados):
         self.lugar = lugar
         self.fechaHora = fechaHora
         self.usuario = usuario
         self.redSocial = redSocial
         self.textoMensaje = textoMensaje
+        self.listaProbabilidadesCalulados = listaProbabilidadesCalulados
 
     def getLugar(self):
         return self.lugar
@@ -35,3 +36,20 @@ class Mensaje:
     
     def setTextoMensaje(self, textoMensaje):
         self.textoMensaje = textoMensaje
+
+class Probabilidad:
+    def __init__(self, perfil, porcentaje):
+        self.perfil = perfil
+        self.porcentaje = porcentaje
+
+    def getPerfil(self):
+        return self.perfil
+    
+    def getPorcentaje(self):
+        return self.porcentaje
+    
+    def setPerfil(self, perfil):
+        self.perfil = perfil
+
+    def setPorcentaje(self, porcentaje):
+        self.porcentaje = porcentaje
