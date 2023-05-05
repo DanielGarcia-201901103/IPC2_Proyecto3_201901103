@@ -2,12 +2,9 @@ import re
 from solicitudDos import Probabilidad
 
 def calcularDatos(listPerfiles,palabrasDescartadas,soloMensaje):
-    listaPerfilesRealizados = listPerfiles
-    excluidas=palabrasDescartadas
     #Primer paso obtener el mensaje
-    mensaje = soloMensaje
     # Segundo paso eliminar signos 
-    mensaje = re.sub(r'[\,\.\\\/\(\)\=\?\¡\¿\'\<\^\>\"\#\%\&\$\#\!\|\¬\°\}\{\]\`\+\*\~\¨\´\[\:\;\-\_]', '', mensaje)
+    mensaje = re.sub(r'[\,\.\\\/\(\)\=\?\¡\¿\'\<\^\>\"\#\%\&\$\#\!\|\¬\°\}\{\]\`\+\*\~\¨\´\[\:\;\-\_]', '', soloMensaje)
     
     #tercer paso separar todas las palabras en una lista sin los espacios
     listapalabras = mensaje.split()
@@ -15,7 +12,7 @@ def calcularDatos(listPerfiles,palabrasDescartadas,soloMensaje):
     #cuarto paso eliminar las palabras excluidas y tambien eliminar los numeros como digitos
     mensajesinExcluidas = ''
     for cpalabra in listapalabras:
-        if cpalabra.lower() in [eliminar.lower() for eliminar in excluidas]:
+        if cpalabra.lower() in [eliminar.lower() for eliminar in palabrasDescartadas]:
             pass
         else:
             if cpalabra.isdigit():
@@ -29,9 +26,9 @@ def calcularDatos(listPerfiles,palabrasDescartadas,soloMensaje):
     totalPalabrasSINEXCLUIDAS = len(listapalabrasEncuenta)
     listaProbabilidades = []
 
-    for i in listaPerfilesRealizados:
+    for i in listPerfiles:
         aux_perfil = i.nombre
-        aux_lista =i.listaPalabrasClave
+        aux_lista = i.listaPalabrasClave
         #print(aux_perfil)
         contadorPalabras = 0
         for j in aux_lista:
@@ -45,10 +42,10 @@ def calcularDatos(listPerfiles,palabrasDescartadas,soloMensaje):
         #print(contadorPalabras)
         resultadoCalculoPorcentajes = calcularPorcentajes(int(totalPalabrasSINEXCLUIDAS),int(contadorPalabras))
         
-        resultadoCalculoPorcentajes = round(resultadoCalculoPorcentajes, 2)
+        resultadoTotal = round(resultadoCalculoPorcentajes, 2)
         print(resultadoCalculoPorcentajes)
 
-        objetoProbabilidad = Probabilidad(aux_perfil,resultadoCalculoPorcentajes)
+        objetoProbabilidad = Probabilidad(aux_perfil,resultadoTotal)
         listaProbabilidades.append(objetoProbabilidad)
         # Crear una lista donde se almacene la relacion entre el nombre del perfil,porcentaje, mensaje, fecha, lugar, usuario
     return listaProbabilidades

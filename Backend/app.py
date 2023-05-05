@@ -322,7 +322,9 @@ def solicitudesCreacionMensajes():
             #print(liredS[1].strip())
             #print(soloMensaje.strip())
 
-            objetoMensaje = Mensaje(str(lislugFech1[0]).strip(),str(lislugFech1[1]).strip(),str(liusua[1]).strip(),str(liredS[1]).strip(),str(soloMensaje).strip())
+            listaProbabilidadesCalulados = calculos.calcularDatos(listPerfiles,palabrasDescartadas,str(soloMensaje).strip())
+            objetoMensaje = Mensaje(str(lislugFech1[0]).strip(),str(lislugFech1[1]).strip(),str(liusua[1]).strip(),str(liredS[1]).strip(),str(soloMensaje).strip(), listaProbabilidadesCalulados)
+
             listMensajes.append(objetoMensaje)
 
         '''
@@ -344,6 +346,16 @@ def solicitudesCreacionMensajes():
         root1 = ET.Element('respuesta')
         ET.SubElement(root1,'fechaHora').text= str(lislugFech1[1]).strip()
         ET.SubElement(root1,'usuario').text= str(liusua[1]).strip()
+        perfs = ET.SubElement(root1,'perfiles')
+        for i in listMensajes:
+            auxListaProbabilidades= i.listaProbabilidadesCalulados
+            for j in auxListaProbabilidades:
+                auxiliarPerfil =j.perfil
+                auxiliarPorcentaje = j.porcentaje
+                perf = ET.SubElement(perfs,'perfil', nombre = str(auxiliarPerfil))
+                ET.SubElement(perf,'porcentajeProbabilidad').text= str(str(auxiliarPorcentaje)+' %')
+
+
         ET.indent(root1)
         archivo_Respuesta2XML = ET.ElementTree(root1)
         archivo_Respuesta2XML.write('Backend\ArchivosXML\peticionSolicitudCMensajes'+'.xml')

@@ -1,4 +1,12 @@
 <respuesta>
   <fechaHora>01/04/2023 15:21</fechaHora>
   <usuario>map0002@usac.edu</usuario>
+  <perfiles>
+    <perfil nombre="Deportista">
+      <porcentajeProbabilidad>10.71 %</porcentajeProbabilidad>
+    </perfil>
+    <perfil nombre="Cultura saludable">
+      <porcentajeProbabilidad>25.0 %</porcentajeProbabilidad>
+    </perfil>
+  </perfiles>
 </respuesta>
