@@ -389,7 +389,7 @@ def solicitudesCreacionMensajes():
 def pesosPorUsuario():
     try:
         pass
-        return jsonify({"Nombre":'falta realizar los calculos'}) 
+        return jsonify({"message":'falta realizar los calculos'}) 
     except:
         return jsonify({"message": "Ha ocurrido un error"})
 
@@ -399,7 +399,7 @@ def detalleMensajesPorUsuario():
         #Obtener la fecha por la cual se va buscar
         
         pass
-        return jsonify({"Nombre":'falta realizar los calculos'}) 
+        return jsonify({"message":'falta realizar los calculos'}) 
     except:
         return jsonify({"message": "Ha ocurrido un error"})
 
