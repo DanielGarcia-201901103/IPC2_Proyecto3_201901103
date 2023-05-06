@@ -414,9 +414,11 @@ def detalleMensajesPorUsuario():
                     if busqueda_usuario.lower().strip() == almacenadaUsuario.lower().strip():
                         print("Usuario unico encontrado"+ busqueda_usuario)
                         listaEncontrados.append(usuarios1)
-        return jsonify({"message":"Encontrado"}) 
+        
+        #Escribir en un string la tabla de html para devolverla en el resultado
+        return jsonify({"lista":listaEncontrados}) 
     except:
-        return jsonify({"message": "Ha ocurrido un error"})
+        return jsonify({"lista": "Ha ocurrido un error"})
 
 if __name__=='_main_':
     app.run()
