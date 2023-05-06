@@ -1,0 +1,26 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/ayuda.css' %}">
+
+<ul class="datosProgramador">
+    <li>
+        <h2>Resumen de pesos por usuario</h2>
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div>
+                <label for="usuario">Escriba el nombre del usuario ó la palabra todos, para todos los usuarios. Sin espacios</label>
+				<input type="text" name="usuario" id="usuario" class="input-padron" required placeholder="map001 ó map001@usac.edu.gt.">
+            </div>
+            <br>
+            <input type="submit" value="Buscar">
+        </form>
+    </li>
+    
+        {% if respuesta_servidor %}
+        {{ respuesta_servidor }}
+        {% endif %}
+    
+</ul>
+
+{% endblock %}

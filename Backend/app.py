@@ -371,7 +371,7 @@ def solicitudesCreacionMensajes():
     except:
         return "Ha ocurrido un error en los datos del archivo xml"
 
-@app.route("/resumenPesosporUsuario",methods=['GET'])
+@app.route("/resumenPesosporUsuario",methods=['POST'])
 def pesosPorUsuario():
     try:
         pass
@@ -418,32 +418,33 @@ def detalleMensajesPorUsuario():
                     if busqueda_usuario.lower().strip() == almacenadaUsuario.lower().strip():
                         print("Usuario unico encontrado"+ busqueda_usuario)
                         listaEncontrados.append(usuarios1)
-
-        for b in listaEncontrados:
-            estructuraTablas = f'''
-    <p>{b.usuario} </p> 
-    <table style="width:100%" border = "1">
-    <tr>
-        <th>Mensaje</th>
-    '''     
-            estructura_filas += f'''
-    <tr>
-    <td>{b.fechaHora}</td>'''
             
-            for c in b.listaProbabilidadesCalulados:
-                estructuraTablas += f'''
-        <th>%probabilidad perfil “{c.perfil}”</th>
-                ''' 
-                estructura_filas += f'''<td>{str(c.porcentaje)} %</td>''' 
-            estructura_filas += f'</tr>'
-            estructuraTablas += f'</tr>' 
-            estructuraTotal += estructuraTablas +estructura_filas+f'</table>'
+            
+            for b in listaEncontrados:
+                estructuraTablas = f'''
+        <p>{b.usuario} </p> 
+        <table style="width:100%" border = "1">
+        <tr>
+            <th>Mensaje</th>
+        '''     
+                estructura_filas += f'''
+        <tr>
+        <td>{b.fechaHora}</td>'''
+                
+                for c in b.listaProbabilidadesCalulados:
+                    estructuraTablas += f'''
+            <th>%probabilidad perfil “{c.perfil}”</th>
+                    ''' 
+                    estructura_filas += f'''<td>{str(c.porcentaje)} %</td>''' 
+                estructura_filas += f'</tr>'
+                estructuraTablas += f'</tr>' 
+                estructuraTotal += estructuraTablas +estructura_filas+f'</table>'
 
-        f =  open("tablas.html", 'w', encoding='utf-8')
-        f.write(estructuraTotal)
-        f.close()
-        pathTecnico = "tablas.html" 
-        webbrowser.open_new(pathTecnico)
+            f =  open("tablas.html", 'w', encoding='utf-8')
+            f.write(estructuraTotal)
+            f.close()
+            pathTecnico = "tablas.html" 
+            webbrowser.open_new(pathTecnico)
         return jsonify({"lista":estructuraTotal}) 
     except:
         return jsonify({"lista": "Ha ocurrido un error"})

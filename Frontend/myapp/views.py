@@ -87,7 +87,30 @@ def detalleMensajes(request):
         return render(request, 'detalleMensajess.html',{'respuesta_servidor':''})
 
 def resumenPesos(request):
-    pass
+    if request.method == 'POST':
+        usuario_Obtenido = request.POST.get('usuario')
+        xml = f"<busqueda><usuario>{usuario_Obtenido}</usuario></busqueda>"
+        
+        headers = {'Content-Type': 'application/xml'}
+        response = requests.post('http://127.0.0.1:5000/resumenPesosporUsuario', data=xml, headers=headers)
+
+        if response.status_code==200:
+            print("Correcto")
+            datosxml = response.json()
+
+            #parsed_xml = ET.fromstring(datosxml)
+            #sorted_xml = ET.ElementTree(parsed_xml)
+            #sorted_xml.write('sorted_xml.xml', encoding='utf-8', xml_declaration= True)
+            #with open('sorted_xml.xml', 'r') as file:
+            #    sorted_xml_data = file.read()
+            respuesta_servidor = datosxml['lista']
+
+            return render(request, 'resumenPeso.html',{'respuesta_servidor':'Tabla realizada'})
+        else:
+            print("incorrecto")
+            return render(request, 'resumenPeso.html',{'respuesta_servidor':'Incorrecto'})    
+    else:
+        return render(request, 'resumenPeso.html',{'respuesta_servidor':''})
 
 def creacion1Mensaje(request):
     if request.method == 'POST':
