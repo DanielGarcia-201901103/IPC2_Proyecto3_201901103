@@ -70,11 +70,15 @@ def detalleMensajes(request):
 
         if response.status_code==200:
             print("Correcto")
-            #datosxml = response.text
-            diccionario = response.json()
-            lista = diccionario["lista"]
-            respuesta_servidor = list(lista)
-            print(type(respuesta_servidor))
+            datosxml = response.json()
+
+            #parsed_xml = ET.fromstring(datosxml)
+            #sorted_xml = ET.ElementTree(parsed_xml)
+            #sorted_xml.write('sorted_xml.xml', encoding='utf-8', xml_declaration= True)
+            #with open('sorted_xml.xml', 'r') as file:
+            #    sorted_xml_data = file.read()
+            respuesta_servidor = datosxml['lista']
+
             return render(request, 'detalleMensajess.html',{'respuesta_servidor':respuesta_servidor})
         else:
             print("incorrecto")

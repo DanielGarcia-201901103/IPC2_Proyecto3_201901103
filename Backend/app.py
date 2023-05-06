@@ -397,6 +397,7 @@ def detalleMensajesPorUsuario():
         #validar si la busqueda será por un usuario especifico o por medio de todos
         #buscar por la fecha
         listaEncontrados = []
+        
         if busqueda_usuario.lower().strip() == 'todos':
             for todosUsuarios in listMensajes:
                 #Obteniendo fecha de la lista
@@ -414,9 +415,32 @@ def detalleMensajesPorUsuario():
                     if busqueda_usuario.lower().strip() == almacenadaUsuario.lower().strip():
                         print("Usuario unico encontrado"+ busqueda_usuario)
                         listaEncontrados.append(usuarios1)
-        
-        #Escribir en un string la tabla de html para devolverla en el resultado
-        return jsonify({"lista":listaEncontrados}) 
+
+        estructuraTablas = ''
+        estructura_filas = ''
+        estructuraTotal = ''
+        for b in listaEncontrados:
+            estructuraTablas += f'''
+    <p>{b.usuario} </p> 
+    <table style="width:100%">
+    <tr>
+        <th>Mensaje</th>
+    '''     
+            estructura_filas += f'''
+    <tr>
+    <td>{b.fechaHora}</td>'''
+            
+            for c in b.listaProbabilidadesCalulados:
+                estructuraTablas += f'''
+        <th>%probabilidad perfil “{c.perfil}”</th>
+                ''' 
+                estructura_filas += f'''<td>{str(c.porcentaje)} %</td>''' 
+            estructura_filas += f'</tr>'
+            estructuraTablas += f'</tr>' 
+            estructuraTotal += estructuraTablas +estructura_filas+f'</table>'
+
+        print(estructuraTotal)
+        return jsonify({"lista":estructuraTotal}) 
     except:
         return jsonify({"lista": "Ha ocurrido un error"})
 

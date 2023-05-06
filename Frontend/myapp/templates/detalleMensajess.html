@@ -18,11 +18,11 @@
             <input type="submit" value="Buscar">
         </form>
     </li>
-    <li>
+    
         {% if respuesta_servidor %}
-        <textarea cols="40" rows="30" id="mensaje2" class="input-padron" required>{{ respuesta_servidor }}</textarea>
+        {{ respuesta_servidor }}
         {% endif %}
-    </li>
+    
 </ul>
 
 {% endblock %}
