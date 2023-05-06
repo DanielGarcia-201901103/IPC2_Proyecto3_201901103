@@ -10,9 +10,9 @@
         {% csrf_token %}
             <div>
                 <label for="fecha">Fecha</label>
-				<input type="text" name="" id="fecha" class="input-padron" required placeholder="dd/mm/yyyy">
-                <label for="usuario">Escriba el nombre del usuario ó la palabra todos, para todos los usuarios</label>
-				<input type="text" name="" id="usuario" class="input-padron" required placeholder="nombre_usuario_sin_espacios ó map001@usac.edu.gt.">
+				<input type="text" name="fecha" id="fecha" class="input-padron" required placeholder="dd/mm/yyyy">
+                <label for="usuario">Escriba el nombre del usuario ó la palabra todos, para todos los usuarios. Sin espacios</label>
+				<input type="text" name="usuario" id="usuario" class="input-padron" required placeholder="map001 ó map001@usac.edu.gt.">
             </div>
             <br>
             <input type="submit" value="Buscar">

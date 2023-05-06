@@ -60,7 +60,30 @@ def servicioDos(request):
         return render(request, 'solicitarDos.html',{'respuesta_servidor':''})
 
 def detalleMensajes(request):
-    pass
+    if request.method == 'POST':
+        fecha_Obtenida = request.POST.get('fecha')
+        usuario_Obtenido = request.POST.get('usuario')
+        xml = f"<busqueda><fecha>{fecha_Obtenida}</fecha><usuario>{usuario_Obtenido}</usuario></busqueda>"
+        
+        headers = {'Content-Type': 'application/xml'}
+        response = requests.post('http://127.0.0.1:5000/detalleMensajesporUsuario', data=xml, headers=headers)
+
+        if response.status_code==201:
+            print("Correcto")
+            datosxml = response.text
+            #parsed_xml = ET.fromstring(datosxml)
+            #sorted_xml = ET.ElementTree(parsed_xml)
+            #sorted_xml.write('sorted_xml.xml', encoding='utf-8', xml_declaration= True)
+            #with open('sorted_xml.xml', 'r') as file:
+            #    sorted_xml_data = file.read()
+            respuesta_servidor = datosxml
+
+            return render(request, 'detalleMensajess.html',{'respuesta_servidor':respuesta_servidor})
+        else:
+            print("incorrecto")
+            return render(request, 'detalleMensajess.html',{'respuesta_servidor':'Incorrecto'})    
+    else:
+        return render(request, 'detalleMensajess.html',{'respuesta_servidor':''})
 
 def resumenPesos(request):
     pass
