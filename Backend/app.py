@@ -381,6 +381,7 @@ def pesosPorUsuario():
 
 @app.route("/detalleMensajesporUsuario",methods=['POST'])
 def detalleMensajesPorUsuario():
+    global listMensajes
     try:
         #<busqueda><fecha>{fecha_Obtenida}</fecha><usuario>{usuario_Obtenido}</usuario></busqueda>
         #Obtener la fecha por la cual se va buscar
@@ -391,10 +392,29 @@ def detalleMensajesPorUsuario():
                 busqueda_fecha  = dat.text
             elif dat.tag == "usuario":
                 busqueda_usuario  = dat.text
-        print(busqueda_fecha)
-        print(busqueda_usuario)
-        
-        return jsonify({"message":'falta realizar los calculos'}) 
+        #print(busqueda_fecha)
+        #print(busqueda_usuario)
+        #validar si la busqueda será por un usuario especifico o por medio de todos
+        #buscar por la fecha
+        listaEncontrados = []
+        if busqueda_usuario.lower().strip() == 'todos':
+            for todosUsuarios in listMensajes:
+                #Obteniendo fecha de la lista
+                almacenadaFecha = todosUsuarios.fechaHora
+                if busqueda_fecha.lower().strip() in almacenadaFecha.lower().strip():
+                    print("fecha encontrada"+ busqueda_fecha)
+                    listaEncontrados.append(todosUsuarios)
+
+        else:
+            for usuarios1 in listMensajes:
+                #Obteniendo fecha de la lista
+                almacenadaFecha = usuarios1.fechaHora
+                almacenadaUsuario = usuarios1.usuario
+                if busqueda_fecha.lower().strip() in almacenadaFecha.lower().strip():
+                    if busqueda_usuario.lower().strip() == almacenadaUsuario.lower().strip():
+                        print("Usuario unico encontrado"+ busqueda_usuario)
+                        listaEncontrados.append(usuarios1)
+        return jsonify({"message":"Encontrado"}) 
     except:
         return jsonify({"message": "Ha ocurrido un error"})
 
