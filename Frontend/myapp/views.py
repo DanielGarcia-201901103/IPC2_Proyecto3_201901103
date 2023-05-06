@@ -79,7 +79,7 @@ def detalleMensajes(request):
             #    sorted_xml_data = file.read()
             respuesta_servidor = datosxml['lista']
 
-            return render(request, 'detalleMensajess.html',{'respuesta_servidor':respuesta_servidor})
+            return render(request, 'detalleMensajess.html',{'respuesta_servidor':f'{respuesta_servidor}'})
         else:
             print("incorrecto")
             return render(request, 'detalleMensajess.html',{'respuesta_servidor':'Incorrecto'})    
