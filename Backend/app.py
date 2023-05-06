@@ -379,12 +379,21 @@ def pesosPorUsuario():
     except:
         return jsonify({"message": "Ha ocurrido un error"})
 
-@app.route("/detalleMensajesporUsuario",methods=['GET'])
+@app.route("/detalleMensajesporUsuario",methods=['POST'])
 def detalleMensajesPorUsuario():
     try:
+        #<busqueda><fecha>{fecha_Obtenida}</fecha><usuario>{usuario_Obtenido}</usuario></busqueda>
         #Obtener la fecha por la cual se va buscar
+        archivo = request.data.decode('utf-8')
+        raiz = et.XML(archivo)
+        for dat in raiz:
+            if dat.tag == "fecha":
+                busqueda_fecha  = dat.text
+            elif dat.tag == "usuario":
+                busqueda_usuario  = dat.text
+        print(busqueda_fecha)
+        print(busqueda_usuario)
         
-        pass
         return jsonify({"message":'falta realizar los calculos'}) 
     except:
         return jsonify({"message": "Ha ocurrido un error"})

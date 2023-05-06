@@ -68,7 +68,7 @@ def detalleMensajes(request):
         headers = {'Content-Type': 'application/xml'}
         response = requests.post('http://127.0.0.1:5000/detalleMensajesporUsuario', data=xml, headers=headers)
 
-        if response.status_code==201:
+        if response.status_code==200:
             print("Correcto")
             datosxml = response.text
             #parsed_xml = ET.fromstring(datosxml)
