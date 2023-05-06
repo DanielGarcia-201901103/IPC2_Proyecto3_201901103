@@ -3,22 +3,22 @@
   <usuario>diegoalva1346</usuario>
   <perfiles>
     <perfil nombre="deportista">
-      <porcentajeProbabilidad>1.19 %</porcentajeProbabilidad>
+      <porcentajeProbabilidad>0.0 %</porcentajeProbabilidad>
     </perfil>
     <perfil nombre="pintor">
-      <porcentajeProbabilidad>2.38 %</porcentajeProbabilidad>
+      <porcentajeProbabilidad>0.0 %</porcentajeProbabilidad>
     </perfil>
     <perfil nombre="cocinero">
-      <porcentajeProbabilidad>14.29 %</porcentajeProbabilidad>
+      <porcentajeProbabilidad>3.17 %</porcentajeProbabilidad>
     </perfil>
     <perfil nombre="corredor">
-      <porcentajeProbabilidad>4.76 %</porcentajeProbabilidad>
+      <porcentajeProbabilidad>0.0 %</porcentajeProbabilidad>
     </perfil>
     <perfil nombre="ingeniero">
-      <porcentajeProbabilidad>1.19 %</porcentajeProbabilidad>
+      <porcentajeProbabilidad>0.0 %</porcentajeProbabilidad>
     </perfil>
     <perfil nombre="musico">
-      <porcentajeProbabilidad>2.38 %</porcentajeProbabilidad>
+      <porcentajeProbabilidad>1.59 %</porcentajeProbabilidad>
     </perfil>
   </perfiles>
 </respuesta>

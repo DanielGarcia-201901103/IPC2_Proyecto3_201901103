@@ -37,7 +37,27 @@ def servicioUno(request):
 #https://sydjameer.medium.com/how-to-resolve-forbidden-403-if-django-csrf-mechanism-has-not-been-used-in-post-method-1aeeb8540404
 
 def servicioDos(request):
-    pass
+    if request.method == 'POST':
+        archivo = request.FILES['mensaje']
+        headers = {'Content-Type': 'application/xml'}
+        response = requests.post('http://127.0.0.1:5000/cargarSolicitudDos', data=archivo.read(), headers=headers)
+
+        if response.status_code==200:
+            print("Correcto")
+            datosxml = response.text
+            #parsed_xml = ET.fromstring(datosxml)
+            #sorted_xml = ET.ElementTree(parsed_xml)
+            #sorted_xml.write('sorted_xml.xml', encoding='utf-8', xml_declaration= True)
+            #with open('sorted_xml.xml', 'r') as file:
+            #    sorted_xml_data = file.read()
+            respuesta_servidor = datosxml
+
+            return render(request, 'solicitarDos.html',{'respuesta_servidor':respuesta_servidor})
+        else:
+            print("incorrecto")
+            return render(request, 'solicitarDos.html',{'respuesta_servidor':'Incorrecto'})    
+    else:
+        return render(request, 'solicitarDos.html',{'respuesta_servidor':''})
 
 def detalleMensajes(request):
     pass
@@ -46,7 +66,27 @@ def resumenPesos(request):
     pass
 
 def creacion1Mensaje(request):
-    pass
+    if request.method == 'POST':
+        archivo = request.FILES['mensaje']
+        headers = {'Content-Type': 'application/xml'}
+        response = requests.post('http://127.0.0.1:5000/peticionCreacionMensajes', data=archivo.read(), headers=headers)
+
+        if response.status_code==200:
+            print("Correcto")
+            datosxml = response.text
+            #parsed_xml = ET.fromstring(datosxml)
+            #sorted_xml = ET.ElementTree(parsed_xml)
+            #sorted_xml.write('sorted_xml.xml', encoding='utf-8', xml_declaration= True)
+            #with open('sorted_xml.xml', 'r') as file:
+            #    sorted_xml_data = file.read()
+            respuesta_servidor = datosxml
+
+            return render(request, 'creacionUnMensaje.html',{'respuesta_servidor':respuesta_servidor})
+        else:
+            print("incorrecto")
+            return render(request, 'creacionUnMensaje.html',{'respuesta_servidor':'Incorrecto'})    
+    else:
+        return render(request, 'creacionUnMensaje.html',{'respuesta_servidor':''})
 
 def limpiar(request):
     response = requests.delete('http://127.0.0.1:5000/resetDatos')
