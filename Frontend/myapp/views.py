@@ -11,13 +11,7 @@ def index(request):
         'title': title
     })
 
-def peticiones(request):
-    username = ['a', 'b','c','d', 'e',False,'f']
-    return render(request, 'peticiones.html',{
-        'username': username
-    })
-
-def servicio(request):
+def servicioUno(request):
     if request.method == 'POST':
         archivo = request.FILES['mensaje']
         headers = {'Content-Type': 'application/xml'}
@@ -33,14 +27,27 @@ def servicio(request):
             #    sorted_xml_data = file.read()
             respuesta_servidor = datosxml
 
-            return render(request, 'solicitarServicio.html',{'respuesta_servidor':respuesta_servidor})
+            return render(request, 'solicitarUno.html',{'respuesta_servidor':respuesta_servidor})
         else:
             print("incorrecto")
-            return render(request, 'solicitarServicio.html',{'respuesta_servidor':'Incorrecto'})    
+            return render(request, 'solicitarUno.html',{'respuesta_servidor':'Incorrecto'})    
     else:
-        return render(request, 'solicitarServicio.html',{'respuesta_servidor':''})
+        return render(request, 'solicitarUno.html',{'respuesta_servidor':''})
 #Enlace para resolver algunos errores    
 #https://sydjameer.medium.com/how-to-resolve-forbidden-403-if-django-csrf-mechanism-has-not-been-used-in-post-method-1aeeb8540404
+
+def servicioDos(request):
+    pass
+
+def detalleMensajes(request):
+    pass
+
+def resumenPesos(request):
+    pass
+
+def creacion1Mensaje(request):
+    pass
+
 def limpiar(request):
     response = requests.delete('http://127.0.0.1:5000/resetDatos')
     return render(request, 'limpiar.html')
@@ -67,4 +74,10 @@ def help(request):
     return HttpResponse("<h1>Acerca de</h1>")
 
 '''
-
+'''
+def peticiones(request):
+    username = ['a', 'b','c','d', 'e',False,'f']
+    return render(request, 'peticiones.html',{
+        'username': username
+    })
+'''
