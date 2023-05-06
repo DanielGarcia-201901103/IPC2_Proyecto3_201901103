@@ -1,0 +1,28 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/ayuda.css' %}">
+
+<ul class="datosProgramador">
+    <li>
+        <h2>Detalle de mensajes por usuario</h2>
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div>
+                <label for="fecha">Fecha</label>
+				<input type="text" name="" id="fecha" class="input-padron" required placeholder="dd/mm/yyyy">
+                <label for="usuario">Escriba el nombre del usuario ó la palabra todos, para todos los usuarios</label>
+				<input type="text" name="" id="usuario" class="input-padron" required placeholder="nombre_usuario_sin_espacios ó map001@usac.edu.gt.">
+            </div>
+            <br>
+            <input type="submit" value="Buscar">
+        </form>
+    </li>
+    <li>
+        {% if respuesta_servidor %}
+        <textarea cols="40" rows="30" id="mensaje2" class="input-padron" required>{{ respuesta_servidor }}</textarea>
+        {% endif %}
+    </li>
+</ul>
+
+{% endblock %}
