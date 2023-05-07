@@ -4,21 +4,27 @@
   <perfiles>
     <perfil nombre="deportista">
       <porcentajeProbabilidad>0.0 %</porcentajeProbabilidad>
+      <pesoActual>4.364999999999999</pesoActual>
     </perfil>
     <perfil nombre="pintor">
       <porcentajeProbabilidad>0.0 %</porcentajeProbabilidad>
+      <pesoActual>4.364999999999999</pesoActual>
     </perfil>
     <perfil nombre="cocinero">
       <porcentajeProbabilidad>3.17 %</porcentajeProbabilidad>
+      <pesoActual>4.364999999999999</pesoActual>
     </perfil>
     <perfil nombre="corredor">
       <porcentajeProbabilidad>0.0 %</porcentajeProbabilidad>
+      <pesoActual>4.364999999999999</pesoActual>
     </perfil>
     <perfil nombre="ingeniero">
       <porcentajeProbabilidad>0.0 %</porcentajeProbabilidad>
+      <pesoActual>4.364999999999999</pesoActual>
     </perfil>
     <perfil nombre="musico">
       <porcentajeProbabilidad>1.59 %</porcentajeProbabilidad>
+      <pesoActual>4.364999999999999</pesoActual>
     </perfil>
   </perfiles>
 </respuesta>

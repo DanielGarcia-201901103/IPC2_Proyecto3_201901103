@@ -13,6 +13,7 @@ palabrasDescartadas = []
 listPerfiles = []
 #LISTAS PARA MENSAJES
 listMensajes = []
+listPesos = []
 #Esta lista solo sirve para manejar los datos del metodo cargarMensajes
 listAuxUsuarios = []
 
@@ -328,7 +329,8 @@ def solicitudesCreacionMensajes():
 
             listMensajes.append(objetoMensaje)
 
-            #listaPesosCalculados = calculos.calcularPeso(listMensajes, str(liusua[1]).strip())
+            listPesos = calculos.calcularPeso(listMensajes, str(liusua[1]).strip())
+            
 
         '''
         <?xml version="1.0"?> 
@@ -356,7 +358,10 @@ def solicitudesCreacionMensajes():
             auxiliarPorcentaje = j.porcentaje
             perf = ET.SubElement(perfs,'perfil', nombre = str(auxiliarPerfil))
             ET.SubElement(perf,'porcentajeProbabilidad').text= str(str(auxiliarPorcentaje)+' %')
-
+            for i in listPesos:
+                if str(i["PerfilyPeso"][0]).lower().strip() == auxiliarPerfil.lower().strip():
+                    ET.SubElement(perf,'pesoActual').text = str(i["PerfilyPeso"][1])
+                    break
 
         ET.indent(root1)
         archivo_Respuesta2XML = ET.ElementTree(root1)

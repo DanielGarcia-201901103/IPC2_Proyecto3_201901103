@@ -59,15 +59,42 @@ def calcularPorcentajes(totalPalabrasSINEXCLUIDAS,contadorPalabras):
 
 def calcularPeso(listMensajes, usuarioBuscar):
     suma = 0
+    listaPesos=[]
     for dato in listMensajes:
         auxListaProbabilidades= dato.listaProbabilidadesCalulados
         buscarCoincidenciaUser =dato.usuario
         if buscarCoincidenciaUser.lower() == usuarioBuscar.lower():
             for dato1 in auxListaProbabilidades:
-                auxiliarPerfil = dato1.perfil
+                auxiliarPerfil1 = dato1.perfil
                 auxiliarPorcentaje = dato1.porcentaje
+                listaAuxiliarPorcentajes = []
+                for dato2 in auxListaProbabilidades:
+                    auxiliarPerfil2 = dato1.perfil
+                    if auxiliarPerfil1 == auxiliarPerfil2:
+                        print(auxiliarPerfil1)
+                        auxiliarPorcentaje = dato2.porcentaje
+                        if auxiliarPorcentaje != 0: 
+                            print(auxiliarPorcentaje)
+                            listaAuxiliarPorcentajes.append(auxiliarPorcentaje)
+                        # si son iguales entonces guardar el porcentaje en una lista si y solo si el porcentaje es diferente de 0
+                suma = 0
+                
+                for x in listaAuxiliarPorcentajes:
+                    suma += float(x)
+                resultadoPeso = suma/len(listaAuxiliarPorcentajes)
+                #recorrer la lista de porcentajes y validar si el tamaño de la lista y calcular todos los datos dividido el tamaño de la lista
+                #Guardar en una lista el objeto que almacene el usuario, lista de perfiles junto a sus pesos
+                diccionarioObjeto = {
+                        "usuario": buscarCoincidenciaUser,
+                        "PerfilyPeso":[auxiliarPerfil1,resultadoPeso]
+                        }
+                listaPesos.append(diccionarioObjeto)
+                
+    return listaPesos
+
                 #comparar los perfiles, si el perfil actual es igual a los siguientes perfiles entonces hacer calculo de peso
                 #luego guardar el peso, junto al perfil, y el usuario en una lista y retornarlo 
+
 
     '''
     obtener la lista de probabilidades
