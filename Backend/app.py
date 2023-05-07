@@ -413,9 +413,32 @@ def detalleMensajesPorUsuario():
                 if busqueda_fecha.lower().strip() in almacenadaFecha.lower().strip():
                     print("fecha encontrada"+ busqueda_fecha)
                     listaEncontrados.append(todosUsuarios)
-                    for to in todosUsuarios.listaProbabilidadesCalulados:
-                        pass
+                    
+            for b in listaEncontrados:
+                estructuraTablas = f'''
+        <p>{b.usuario} </p> 
+        <table style="width:100%" border = "1">
+        <tr>
+            <th>Mensaje</th>
+        '''     
+                estructura_filas += f'''
+        <tr>
+        <td>{b.fechaHora}</td>'''
+                
+                for c in b.listaProbabilidadesCalulados:
+                    estructuraTablas += f'''
+            <th>%probabilidad perfil “{c.perfil}”</th>
+                    ''' 
+                    estructura_filas += f'''<td>{str(c.porcentaje)} %</td>''' 
+                estructura_filas += f'</tr>'
+                estructuraTablas += f'</tr>' 
+                estructuraTotal += estructuraTablas +estructura_filas+f'</table>'
 
+            f =  open("tablas1.html", 'w', encoding='utf-8')
+            f.write(estructuraTotal)
+            f.close()
+            pathTecnico = "tablas1.html" 
+            webbrowser.open_new(pathTecnico)
         else:
             for usuarios1 in listMensajes:
                 #Obteniendo fecha de la lista
