@@ -330,7 +330,7 @@ def solicitudesCreacionMensajes():
             listMensajes.append(objetoMensaje)
 
             listPesos = calculos.calcularPeso(listMensajes, str(liusua[1]).strip())
-            
+
 
         '''
         <?xml version="1.0"?> 
@@ -413,6 +413,8 @@ def detalleMensajesPorUsuario():
                 if busqueda_fecha.lower().strip() in almacenadaFecha.lower().strip():
                     print("fecha encontrada"+ busqueda_fecha)
                     listaEncontrados.append(todosUsuarios)
+                    for to in todosUsuarios.listaProbabilidadesCalulados:
+                        pass
 
         else:
             for usuarios1 in listMensajes:
@@ -450,7 +452,7 @@ def detalleMensajesPorUsuario():
             f.close()
             pathTecnico = "tablas.html" 
             webbrowser.open_new(pathTecnico)
-        return jsonify({"lista":estructuraTotal}) 
+        return jsonify({"lista":'Tabla realizada'}) 
     except:
         return jsonify({"lista": "Ha ocurrido un error"})
 
